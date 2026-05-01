@@ -1,13 +1,3 @@
-/**
- * 📱 appsData.js
- * ---------------------------------------------------------
- * Centralized data source for "Our Apps" showcase section.
- * Each object represents an app card with image, description,
- * route link, and optional theme accent.
- *
- * Used in: OurAppsPage.jsx
- */
-
 export const appsData = [
   {
     id: 1,
@@ -15,7 +5,7 @@ export const appsData = [
     subtitle: "AI-Powered Business Assistant",
     description:
       "Automate workflows, gain insights, and boost productivity with AI-powered solutions.",
-    image: "/public/metamatrix.jpeg",
+    image: "/metamatrix.jpeg",
     link: "/metamatrix-app",
     accent: "#00BFA6",
   },
@@ -25,7 +15,7 @@ export const appsData = [
     subtitle: "Omnichannel Chat Platform",
     description:
       "Empower customer engagement with a unified dashboard for WhatsApp, Instagram, and web chat.",
-    image: "/public/conversify.jpeg",
+    image: "/conversify.jpeg",
     link: "/conversify-app",
     accent: "#1976D2",
   },
@@ -35,7 +25,7 @@ export const appsData = [
     subtitle: "Digital Business Card App",
     description:
       "Share your profile instantly via NFC and QR codes. Make networking effortless and sustainable with Tap2Share.",
-    image: "/public/tap2.jpeg",
+    image: "/tap2.jpeg",
     link: "/tap2share-app",
     accent: "#4CAF50",
   },
@@ -45,18 +35,17 @@ export const appsData = [
     subtitle: "Marketplace Management Suite",
     description:
       "Manage vendors, products, and orders seamlessly across your entire eCommerce ecosystem with scalable tools.",
-    image: "/public/vendor.jpeg",
+    image: "/vendor.jpeg",
     link: "/multivendor-app",
     accent: "#FF9800",
   },
-  
   {
     id: 5,
     title: "EduTech",
     subtitle: "Smart Learning Platform",
     description:
       "Reimagine education with personalized dashboards, AI-assisted assessments, and real-time progress analytics.",
-    image: "/public/edutech.jpeg",
+    image: "/edutech.jpeg",
     link: "/edutech-app",
     accent: "#9C27B0",
   },
@@ -66,7 +55,7 @@ export const appsData = [
     subtitle: "Image-Based Product Discovery",
     description:
       "Search products visually using advanced AI recognition. Snap, find, and buy — powered by visual intelligence.",
-    image: "/public/visual.jpeg",
+    image: "/visual.jpeg",
     link: "/visual-search-app",
     accent: "#E91E63",
   },
@@ -76,7 +65,7 @@ export const appsData = [
     subtitle: "Image-Based Product Discovery",
     description:
       "Generate SEO-friendly product descriptions instantly to improve store visibility and sales.",
-    image: "/public/deskribe.jpeg",
+    image: "/deskribe.jpeg",
     link: "/deskribe-app",
     accent: "#E91E63",
   },
