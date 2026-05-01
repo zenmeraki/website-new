@@ -155,9 +155,9 @@ const Landing = () => {
       </Box>
 
 
-      <Box sx={{ bgcolor: "#FFFFFF", m: 0, p: 0 }}>
+      {/* <Box sx={{ bgcolor: "#FFFFFF", m: 0, p: 0 }}>
         <BPO />
-      </Box>
+      </Box> */}
     </>
   );
 };
