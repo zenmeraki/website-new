@@ -221,24 +221,7 @@ function HeroSection({
               GET THE APP
             </MotionButton>
 
-            <MotionButton
-              variant="outlined"
-              color="primary"
-              size={isMobile ? "medium" : "large"}
-              fullWidth={isMobile}
-              startIcon={<LinkIcon fontSize={isMobile ? "small" : "medium"} />}
-              whileHover={{ scale: isMobile ? 1.03 : 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={onOpenReferral}
-              sx={{
-                fontSize: { xs: "0.8rem", md: "0.875rem" },
-                height: { xs: "44px", md: "48px" },
-                textTransform: "none",
-                mt: { xs: 0.5, sm: 0 },
-              }}
-            >
-              Generate Referral Link
-            </MotionButton>
+           
           </Box>
         </Grid>
       </Grid>
