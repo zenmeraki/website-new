@@ -566,90 +566,70 @@ const ServicesPage = () => {
                                         image={services[2].image}
                                         alt={services[2].title}
                                     />
+
                                     <CardContent sx={{ flexGrow: 1, p: { xs: 2, md: 3 } }}>
                                         <Typography
                                             variant="h3"
                                             component="h2"
-                                            sx={{ mb: 1, fontSize: { xs: '1rem', sm: '1.1rem', md: '1.1rem' } }}
+                                            sx={{ mb: 0.5, fontSize: { xs: '1rem', sm: '1.1rem' } }}
                                         >
                                             {services[2].title}
                                         </Typography>
-                                    </CardContent>
-                                    {/* <CardActions sx={{ px: { xs: 2, md: 3 }, pb: { xs: 2, md: 3 } }}>
-                                        <Button
-                                            size="small"
-                                            color="primary"
-                                            endIcon={<ArrowForward sx={{ fontSize: 16 }} />}
-                                            sx={{
-                                                fontWeight: 500,
-                                                color: '#38B2AC',
-                                                fontSize: '0.875rem',
-                                                padding: 0,
-                                                '&:hover': {
-                                                    background: 'transparent',
-                                                    color: '#2C7A7B'
-                                                }
-                                            }}
+
+                                        <Typography
+                                            variant="body1"
+                                            color="text.secondary"
+                                            sx={{ fontSize: '0.8rem', lineHeight: 1.4 }}
                                         >
-                                            Read more
-                                        </Button>
-                                    </CardActions> */}
+                                            {services[2].description.split('.')[0] + '.'}
+                                        </Typography>
+                                    </CardContent>
                                 </Card>
                             </AnimatedCard>
                         </Box>
 
-                        <Box sx={{ gridColumn: { xs: 'span 1', sm: 'span 1/2', md: 'span 3' }, gridRow: { xs: 'auto', md: 'span 1' } }}>
-                            <AnimatedCard delay={1.2} animationType={services[3].animation}>
-                                <Card
-                                    sx={{
-                                        height: '100%',
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        transition: 'transform 0.3s, box-shadow 0.3s',
-                                        '&:hover': {
-                                            transform: 'translateY(-4px)',
-                                            boxShadow: '0 10px 20px rgba(0,0,0,0.08)'
-                                        },
-                                        width: '100%'
-                                    }}
-                                >
-                                    <CardMedia
-                                        component="img"
-                                        sx={{ height: { xs: 100, sm: 120 }, objectFit: 'cover' }}
-                                        image={services[3].image}
-                                        alt={services[3].title}
-                                    />
-                                    <CardContent sx={{ flexGrow: 1, p: { xs: 2, md: 3 } }}>
-                                        <Typography
-                                            variant="h3"
-                                            component="h2"
-                                            sx={{ mb: 1, fontSize: { xs: '1rem', sm: '1.1rem', md: '1.1rem' } }}
-                                        >
-                                            {services[3].title}
-                                        </Typography>
-                                    </CardContent>
-                                    {/* <CardActions sx={{ px: { xs: 2, md: 3 }, pb: { xs: 2, md: 3 } }}>
-                                        <Button
-                                            size="small"
-                                            color="primary"
-                                            endIcon={<ArrowForward sx={{ fontSize: 16 }} />}
-                                            sx={{
-                                                fontWeight: 500,
-                                                color: '#38B2AC',
-                                                fontSize: '0.875rem',
-                                                padding: 0,
-                                                '&:hover': {
-                                                    background: 'transparent',
-                                                    color: '#2C7A7B'
-                                                }
-                                            }}
-                                        >
-                                            Read more
-                                        </Button>
-                                    </CardActions> */}
-                                </Card>
-                            </AnimatedCard>
-                        </Box>
+                     <Box sx={{ gridColumn: { xs: 'span 1', sm: 'span 1/2', md: 'span 3' }, gridRow: { xs: 'auto', md: 'span 1' } }}>
+  <AnimatedCard delay={1.2} animationType={services[3].animation}>
+    <Card
+      sx={{
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        transition: 'transform 0.3s, box-shadow 0.3s',
+        '&:hover': {
+          transform: 'translateY(-4px)',
+          boxShadow: '0 10px 20px rgba(0,0,0,0.08)'
+        },
+        width: '100%'
+      }}
+    >
+      <CardMedia
+        component="img"
+        sx={{ height: { xs: 100, sm: 120 }, objectFit: 'cover' }}
+        image={services[3].image}
+        alt={services[3].title}
+      />
+
+      <CardContent sx={{ flexGrow: 1, p: { xs: 2, md: 3 } }}>
+        <Typography
+          variant="h3"
+          component="h2"
+          sx={{ mb: 0.5, fontSize: { xs: '1rem', sm: '1.1rem' } }}
+        >
+          {services[3].title}
+        </Typography>
+
+        <Typography
+          variant="body1"
+          color="text.secondary"
+          sx={{ fontSize: '0.8rem', lineHeight: 1.4 }}
+        >
+          {services[3].description.split('.')[0] + '.'}
+        </Typography>
+      </CardContent>
+    </Card>
+  </AnimatedCard>
+</Box>
                     </Box>
 
                     {/* Additional Row for 2 More Cards */}
