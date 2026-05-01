@@ -1,44 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { CardMedia, Box, Typography, Button } from "@mui/material";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-
-const AnimatedAppCard = ({ app, delay }) => {
+const AnimatedAppCard = ({ app, delay = 0, isMobile = false }) => {
   const { title, description, image, link } = app;
+  const [active, setActive] = useState(false);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={isMobile ? false : { opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay, duration: 0.6 }}
+      transition={{ delay: isMobile ? 0 : delay, duration: 0.45 }}
       style={{ flex: "0 0 280px" }}
+      onPointerLeave={() => !isMobile && setActive(false)}
     >
       <Box
         component={motion.div}
-        whileHover="hover"
-        whileTap="hover" // 👉 Enables animation for mobile/touch
-        variants={{
-          hover: { scale: 1.05 }
-        }}
+        whileHover={isMobile ? undefined : { scale: 1.05 }}
+        onPointerEnter={() => !isMobile && setActive(true)}
+        onClick={() => isMobile && setActive((v) => !v)}
         sx={{
           width: 280,
           height: 380,
           position: "relative",
-
-          // 📌 Custom curved border style
           borderTopLeftRadius: "70px",
           borderBottomRightRadius: "70px",
           borderTopRightRadius: "16px",
           borderBottomLeftRadius: "16px",
-
           overflow: "hidden",
           cursor: "pointer",
           background: "#023B34",
-          transition: "0.4s ease",
+          WebkitTapHighlightColor: "transparent",
+          touchAction: "manipulation",
         }}
       >
-        {/* Background Image */}
         <CardMedia
           component="img"
           src={image}
@@ -47,12 +43,11 @@ const AnimatedAppCard = ({ app, delay }) => {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            transition: "0.4s ease",
-            "&:hover": { filter: "brightness(55%)" }
+            filter: active ? "brightness(55%)" : "brightness(100%)",
+            transition: "filter 0.25s ease",
           }}
         />
 
-        {/* Always Visible Title */}
         <Typography
           variant="h6"
           sx={{
@@ -60,7 +55,7 @@ const AnimatedAppCard = ({ app, delay }) => {
             bottom: 18,
             left: 20,
             color: "white",
-            fontWeight: "600",
+            fontWeight: 600,
             fontSize: "1.2rem",
             zIndex: 2,
             textShadow: "0 3px 10px rgba(0,0,0,0.5)",
@@ -69,13 +64,13 @@ const AnimatedAppCard = ({ app, delay }) => {
           {title}
         </Typography>
 
-        {/* Hover & Mobile Tap Overlay */}
         <motion.div
-          initial={{ opacity: 0, y: 80 }}
-          variants={{
-            hover: { opacity: 1, y: 0 }
+          initial={false}
+          animate={{
+            opacity: active ? 1 : 0,
+            y: active ? 0 : 80,
           }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.25 }}
           style={{
             position: "absolute",
             inset: 0,
@@ -86,13 +81,10 @@ const AnimatedAppCard = ({ app, delay }) => {
             justifyContent: "center",
             alignItems: "center",
             textAlign: "center",
-            pointerEvents: "auto", // 👉 Makes the button clickable
+            pointerEvents: active ? "auto" : "none",
           }}
         >
-          <Typography
-            variant="body2"
-            sx={{ color: "white", lineHeight: 1.5, mb: 2 }}
-          >
+          <Typography variant="body2" sx={{ color: "white", lineHeight: 1.5, mb: 2 }}>
             {description}
           </Typography>
 
@@ -100,13 +92,14 @@ const AnimatedAppCard = ({ app, delay }) => {
             component={Link}
             to={link}
             variant="contained"
+            onClick={(e) => e.stopPropagation()}
             sx={{
               background: "#57E0C4",
               color: "black",
               fontWeight: 600,
               textTransform: "none",
               px: 3,
-              "&:hover": { background: "#6FFFF1" }
+              "&:hover": { background: "#6FFFF1" },
             }}
           >
             Explore

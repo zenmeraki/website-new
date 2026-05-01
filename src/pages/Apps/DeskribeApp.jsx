@@ -123,9 +123,9 @@ const pricingPlans = [
 
 const faqs = [
   {
-    question: "How do I connect my Shopify store to Deskribe?",
+    question: "How do I connect my Shopify store to Deskribe AI?",
     answer:
-      "Deskribe offers a simple one-click integration with Shopify. Once connected, you can instantly access your products and start generating AI-powered descriptions.",
+      "Deskribe AI offers a simple one-click integration with Shopify. Once connected, you can instantly access your products and start generating AI-powered descriptions.",
   },
   {
     question: "Can Deskribe generate SEO-friendly descriptions for all my products?",
@@ -171,7 +171,7 @@ function HeroSection({
               lineHeight: { xs: 1.3, md: 1.2 },
             }}
           >
-            Descriptions Done Smarter with Deskribe
+            Write Better Descriptions with Deskribe AI
           </Typography>
 
           <Typography
@@ -183,7 +183,7 @@ function HeroSection({
               fontSize: { xs: "0.95rem", md: "1rem" },
             }}
           >
-            Empower your Shopify store with Deskribe, the AI tool that crafts
+            Empower your Shopify store with Deskribe AI, the AI tool that crafts
             perfect product descriptions. Generate, customize, and sell
             smarter—faster than ever before.
           </Typography>
@@ -311,7 +311,7 @@ function HowItWorksSection({ isMobile, theme }) {
         gutterBottom
         sx={{ mb: 3 }}
       >
-        How Deskribe Works
+        How Deskribe AI Works
       </Typography>
 
       <Typography variant="body1" paragraph sx={{ mb: 4 }}>
@@ -583,7 +583,7 @@ function CallToActionSection({ isMobile, theme }) {
               gutterBottom
               color="white"
             >
-              Ready to Boost Your Shopify Sales with Deskribe?
+              Ready to Boost Your Shopify Sales with Deskribe AI?
             </Typography>
             <Typography variant={isMobile ? "body2" : "body1"} sx={{ mb: 3 }} color="white">
               Join merchants using Deskribe to create SEO-friendly, engaging product
@@ -601,11 +601,19 @@ function CallToActionSection({ isMobile, theme }) {
               variant="contained"
               size={isMobile ? "medium" : "large"}
               fullWidth={isMobile}
+              disabled
               sx={{
                 bgcolor: "white",
                 color: "primary.main",
                 textTransform: "none",
-                "&:hover": { bgcolor: "grey.100" },
+                // "&:hover": { bgcolor: "grey.100" },
+
+                // 👇 IMPORTANT FIX
+                "&.Mui-disabled": {
+                  bgcolor: "white",
+                  color: "primary.main",
+                  opacity: 0.5, // adjust 0.6 / 0.7 if needed
+                },
               }}
               onClick={() =>
                 window.open("https://youtu.be/1UMtbQG5Z1M", "_blank", "noopener,noreferrer")
@@ -746,7 +754,7 @@ function DeskribeAppContent() {
                 component="div"
                 sx={{ fontWeight: 600, color: "text.primary" }}
               >
-                Deskribe
+                Deskribe AI
               </Typography>
             </Box>
           </Box>

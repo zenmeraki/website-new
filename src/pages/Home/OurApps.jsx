@@ -213,37 +213,42 @@ const OurAppsPage = () => {
           )}
 
           {/* Scrollable App Cards */}
-          <Box
-            ref={scrollRef}
-            sx={{
-              display: "flex",
-              overflowX: "auto",
-              gap: { xs: 2, md: 3 },
-              py: 2,
-              px: { xs: 2, sm: 4 },
-              scrollSnapType: "x mandatory",
-              scrollPadding: { xs: 2, sm: 4 },
-              scrollBehavior: "smooth",
-              "&::-webkit-scrollbar": isMobile
-                ? { height: "6px" }
-                : { display: "none" },
-              "&::-webkit-scrollbar-thumb": isMobile
-                ? {
-                  backgroundColor: "rgba(0,0,0,0.3)",
-                  borderRadius: 3,
-                }
-                : {},
-              "&::-webkit-scrollbar-track": isMobile
-                ? { backgroundColor: "rgba(0,0,0,0.05)" }
-                : {},
-              msOverflowStyle: isMobile ? "auto" : "none",
-              scrollbarWidth: isMobile ? "thin" : "none",
-            }}
-          >
-            {appsData.map((app, index) => (
-              <AnimatedAppCard key={app.id} app={app} delay={index * 0.1} />
-            ))}
-          </Box>
+        <Box
+  ref={scrollRef}
+  sx={{
+    display: "flex",
+    overflowX: "auto",
+    gap: { xs: 2, md: 3 },
+    py: 2,
+    px: { xs: 2, sm: 4 },
+
+    // mobile touch fix
+    scrollSnapType: { xs: "none", sm: "x mandatory" },
+    scrollBehavior: { xs: "auto", sm: "smooth" },
+    WebkitOverflowScrolling: "touch",
+    touchAction: "pan-x",
+
+    // avoid tap delay/selection issues
+    userSelect: "none",
+    WebkitTapHighlightColor: "transparent",
+
+    "&::-webkit-scrollbar": isMobile
+      ? { display: "none" }
+      : { display: "none" },
+
+    msOverflowStyle: "none",
+    scrollbarWidth: "none",
+  }}
+>
+  {appsData.map((app, index) => (
+    <AnimatedAppCard
+      key={app.id}
+      app={app}
+      delay={isMobile ? 0 : index * 0.1}
+      isMobile={isMobile}
+    />
+  ))}
+</Box>
         </Container>
 
         {/* CTA Section */}
