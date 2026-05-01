@@ -15,7 +15,7 @@ export const appsData = [
     subtitle: "Omnichannel Chat Platform",
     description:
       "Empower customer engagement with a unified dashboard for WhatsApp, Instagram, and web chat.",
-    image: "/conversify.jpeg",
+    image: "/convNew.jpeg",
     link: "/conversify-app",
     accent: "#1976D2",
   },
@@ -65,7 +65,7 @@ export const appsData = [
     subtitle: "Image-Based Product Discovery",
     description:
       "Generate SEO-friendly product descriptions instantly to improve store visibility and sales.",
-    image: "/deskribe.jpeg",
+    image: "/deskribeNew.jpeg",
     link: "/deskribe-app",
     accent: "#E91E63",
   },
