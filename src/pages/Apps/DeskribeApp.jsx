@@ -201,6 +201,7 @@ function HeroSection({
               color="primary"
               size={isMobile ? "medium" : "large"}
               fullWidth={isMobile}
+              disabled   
               startIcon={
                 <DataUsageIcon fontSize={isMobile ? "small" : "medium"} />
               }
@@ -213,6 +214,14 @@ function HeroSection({
                 fontSize: { xs: "0.8rem", md: "0.875rem" },
                 height: { xs: "44px", md: "48px" },
                 textTransform: "none",
+
+                // Optional: override disabled styling (important for MUI)
+                "&.Mui-disabled": {
+                  background: theme.palette.primary.main,
+                  color: "#fff",
+                  opacity: 0.5,
+                },
+
                 background: hoverStates.installBtn
                   ? `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`
                   : theme.palette.primary.main,
@@ -221,7 +230,7 @@ function HeroSection({
               GET THE APP
             </MotionButton>
 
-           
+
           </Box>
         </Grid>
       </Grid>
