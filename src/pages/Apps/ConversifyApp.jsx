@@ -29,7 +29,9 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import ReferralModal from "../../components/ReferralModal";
 import ShopifyStoreModal from "../../components/ShopifyStoreModal";
-import logo from "../../../public/conversify_logo.jpeg";
+
+
+const logo = "/conversify_logo.jpeg";
 
 const MotionBox = motion(Box);
 const MotionPaper = motion(Paper);

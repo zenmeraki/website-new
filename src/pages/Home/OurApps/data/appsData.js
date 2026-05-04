@@ -1,3 +1,13 @@
+// src/Home/OurApps/data/appsData.js
+
+import metamatrixImg from "../../../../../src/assets/images/metamatrix.jpeg";
+import conversifyImg from "../../../../../src/assets/images/convNew.jpeg";
+import tap2shareImg from "../../../../../src/assets/images/tap2.jpeg";
+import multivendorImg from "../../../../../src/assets/images/vendor.jpeg";
+import edutechImg from "../../../../../src/assets/images/edutech.jpeg";
+import visualSearchImg from "../../../../../src/assets/images/visual.jpeg";
+import deskribeImg from "../../../../../src/assets/images/deskribeNew.jpeg";
+
 export const appsData = [
   {
     id: 1,
@@ -5,7 +15,7 @@ export const appsData = [
     subtitle: "AI-Powered Business Assistant",
     description:
       "Automate workflows, gain insights, and boost productivity with AI-powered solutions.",
-    image: "/metamatrix.jpeg",
+    image: metamatrixImg,
     link: "/metamatrix-app",
     accent: "#00BFA6",
   },
@@ -15,7 +25,7 @@ export const appsData = [
     subtitle: "Omnichannel Chat Platform",
     description:
       "Empower customer engagement with a unified dashboard for WhatsApp, Instagram, and web chat.",
-    image: "/convNew.jpeg",
+    image: conversifyImg,
     link: "/conversify-app",
     accent: "#1976D2",
   },
@@ -25,7 +35,7 @@ export const appsData = [
     subtitle: "Digital Business Card App",
     description:
       "Share your profile instantly via NFC and QR codes. Make networking effortless and sustainable with Tap2Share.",
-    image: "/tap2.jpeg",
+    image: tap2shareImg,
     link: "/tap2share-app",
     accent: "#4CAF50",
   },
@@ -35,7 +45,7 @@ export const appsData = [
     subtitle: "Marketplace Management Suite",
     description:
       "Manage vendors, products, and orders seamlessly across your entire eCommerce ecosystem with scalable tools.",
-    image: "/vendor.jpeg",
+    image: multivendorImg,
     link: "/multivendor-app",
     accent: "#FF9800",
   },
@@ -45,7 +55,7 @@ export const appsData = [
     subtitle: "Smart Learning Platform",
     description:
       "Reimagine education with personalized dashboards, AI-assisted assessments, and real-time progress analytics.",
-    image: "/edutech.jpeg",
+    image: edutechImg,
     link: "/edutech-app",
     accent: "#9C27B0",
   },
@@ -55,17 +65,17 @@ export const appsData = [
     subtitle: "Image-Based Product Discovery",
     description:
       "Search products visually using advanced AI recognition. Snap, find, and buy — powered by visual intelligence.",
-    image: "/visual.jpeg",
+    image: visualSearchImg,
     link: "/visual-search-app",
     accent: "#E91E63",
   },
   {
     id: 7,
     title: "Deskribe",
-    subtitle: "Image-Based Product Discovery",
+    subtitle: "AI Product Description Generator",
     description:
       "Generate SEO-friendly product descriptions instantly to improve store visibility and sales.",
-    image: "/deskribeNew.jpeg",
+    image: deskribeImg,
     link: "/deskribe-app",
     accent: "#E91E63",
   },
