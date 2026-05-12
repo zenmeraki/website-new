@@ -24,6 +24,7 @@ import BPOServices from './pages/Expertise/BPOServices'
 import ConversifyApp from './pages/Apps/ConversifyApp'
 import EdutechApp from './pages/Apps/EdutechApp'
 import MetametrixDocs from './pages/MetametrixDocs'
+import ZenoChatLanding from './pages/Apps/ZenoChat'
 
 
 
@@ -107,6 +108,7 @@ function App() {
        <Route path='/deskribe-app' element={<DeskribeApp />}/>
        <Route path='/conversify-app' element={<ConversifyApp/>}/>
        <Route path='/edutech-app' element={<EdutechApp/>}/>
+       <Route path='/zenochat-app' element={<ZenoChatLanding/>}/>
      
     
       </Routes>

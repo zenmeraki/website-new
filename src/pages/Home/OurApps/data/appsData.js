@@ -7,6 +7,7 @@ import multivendorImg from "../../../../../src/assets/images/vendor.jpeg";
 import edutechImg from "../../../../../src/assets/images/edutech.jpeg";
 import visualSearchImg from "../../../../../src/assets/images/visual.jpeg";
 import deskribeImg from "../../../../../src/assets/images/deskribeNew.jpeg";
+import zenochatImg from "../../../../../src/assets/images/zenochatImg.jpg";
 
 export const appsData = [
   {
@@ -78,5 +79,15 @@ export const appsData = [
     image: deskribeImg,
     link: "/deskribe-app",
     accent: "#E91E63",
+  },
+  {
+    id: 8,
+    title: "ZenoChat",
+    subtitle: "WhatsApp Business Inbox",
+    description:
+      "Manage all your WhatsApp customer conversations in one shared team inbox. Assign chats, reply faster, and never miss a message.",
+    image: zenochatImg,
+    link: "/zenochat-app",
+    accent: "#25D366",
   },
 ];
