@@ -108,9 +108,7 @@ function App() {
        <Route path='/deskribe-app' element={<DeskribeApp />}/>
        <Route path='/conversify-app' element={<ConversifyApp/>}/>
        <Route path='/edutech-app' element={<EdutechApp/>}/>
-       <Route path='/zenochat-app' element={<ZenoChatLanding/>}/>
-     
-    
+       <Route path='/zenochat-app' element={<ZenoChatLanding/>}/>   
       </Routes>
     </ThemeProvider>
   )
