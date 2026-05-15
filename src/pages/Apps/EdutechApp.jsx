@@ -23,7 +23,7 @@ import AutoGraphIcon from "@mui/icons-material/AutoGraph";
 import LinkIcon from "@mui/icons-material/Link";
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import { motion, AnimatePresence } from "framer-motion";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -620,12 +620,25 @@ function CallToActionSection({ isMobile, theme }) {
 
 function EduTechContent() {
   const location = useLocation();
+  const navigate = useNavigate();
   const theme = useTheme();
 
-  const queryParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
+  const queryParams = useMemo(
+    () => new URLSearchParams(location.search),
+    [location.search]
+  );
+
   const referralCode = queryParams.get("ref");
 
-  const [activePage, setActivePage] = useState(SECTION_KEYS.HERO);
+  const activePage = useMemo(() => {
+    const pathParts = location.pathname.split("/").filter(Boolean);
+    const lastPath = pathParts[pathParts.length - 1];
+
+    const validSections = Object.values(SECTION_KEYS);
+
+    return validSections.includes(lastPath) ? lastPath : SECTION_KEYS.HERO;
+  }, [location.pathname]);
+
   const [hoverStates, setHoverStates] = useState({});
   const [referralModalOpen, setReferralModalOpen] = useState(false);
   const [storeModalOpen, setStoreModalOpen] = useState(Boolean(referralCode));
@@ -640,13 +653,16 @@ function EduTechContent() {
     { key: SECTION_KEYS.FAQ, label: "FAQ" },
   ];
 
-  const handleHover = (id, isHovering) => {
-    setHoverStates((prev) => ({
-      ...prev,
-      [id]: isHovering,
-    }));
-  };
+const handleHover = (id, isHovering) => {
+  setHoverStates((prev) => ({
+    ...prev,
+    [id]: isHovering,
+  }));
+};
 
+const handleSectionChange = (sectionKey) => {
+  navigate(`/edutech-app/${sectionKey}`);
+};
   const renderActiveSection = () => {
     switch (activePage) {
       case SECTION_KEYS.HERO:
@@ -771,7 +787,7 @@ function EduTechContent() {
                       <MotionButton
                         key={item.key}
                         color="inherit"
-                        onClick={() => setActivePage(item.key)}
+                       onClick={() => handleSectionChange(item.key)}
                         variant="text"
                         sx={{
                           mx: 0.5,

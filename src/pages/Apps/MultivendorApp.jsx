@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+
+import React, { useMemo } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -413,10 +415,19 @@ function CallToActionSection({ isMobile, theme }) {
 }
 
 function MultiVendorContent() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const [activePage, setActivePage] = useState(SECTION_KEYS.HERO);
+  const activePage = useMemo(() => {
+    const pathParts = location.pathname.split("/").filter(Boolean);
+    const lastPath = pathParts[pathParts.length - 1];
+
+    const validSections = Object.values(SECTION_KEYS);
+
+    return validSections.includes(lastPath) ? lastPath : SECTION_KEYS.HERO;
+  }, [location.pathname]);
 
   const navigationItems = [
     { key: SECTION_KEYS.HERO, label: "Hero" },
@@ -424,6 +435,11 @@ function MultiVendorContent() {
     { key: SECTION_KEYS.HOW_IT_WORKS, label: "How It Works" },
     { key: SECTION_KEYS.FAQ, label: "FAQ" },
   ];
+
+  const handleSectionChange = (sectionKey) => {
+    navigate(`/multivendor-app/${sectionKey}`);
+  };
+
 
   const renderActiveSection = () => {
     switch (activePage) {
@@ -532,7 +548,7 @@ function MultiVendorContent() {
                       <MotionButton
                         key={item.key}
                         color="inherit"
-                        onClick={() => setActivePage(item.key)}
+                        onClick={() => handleSectionChange(item.key)}
                         variant="text"
                         sx={{
                           mx: 0.5,

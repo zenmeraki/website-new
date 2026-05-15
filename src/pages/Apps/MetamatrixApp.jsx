@@ -148,7 +148,14 @@ const faqs = [
   },
 ];
 
-function HeroSection({ isMobile, hoverStates, onHover, onOpenInstall, onOpenReferral, theme }) {
+function HeroSection({
+  isMobile,
+  hoverStates,
+  onHover,
+  onOpenInstall,
+  onOpenReferral,
+  theme,
+}) {
   return (
     <Box sx={{ py: { xs: 1, md: 4 } }}>
       <Grid container spacing={isMobile ? 2 : 4}>
@@ -191,7 +198,9 @@ function HeroSection({ isMobile, hoverStates, onHover, onOpenInstall, onOpenRefe
               color="primary"
               size={isMobile ? "medium" : "large"}
               fullWidth={isMobile}
-              startIcon={<DataUsageIcon fontSize={isMobile ? "small" : "medium"} />}
+              startIcon={
+                <DataUsageIcon fontSize={isMobile ? "small" : "medium"} />
+              }
               whileHover={{ scale: isMobile ? 1.03 : 1.05 }}
               whileTap={{ scale: 0.95 }}
               onMouseEnter={() => onHover("installBtn", true)}
@@ -306,7 +315,13 @@ function HowItWorksSection({ isMobile, theme }) {
 
       <Grid container spacing={3} justifyContent="center">
         {items.map((item, index) => (
-          <Grid key={item.title} item xs={12} md={4} sx={{ textAlign: "center" }}>
+          <Grid
+            key={item.title}
+            item
+            xs={12}
+            md={4}
+            sx={{ textAlign: "center" }}
+          >
             <MotionPaper
               elevation={0}
               sx={{
@@ -383,7 +398,14 @@ function PricingSection({ isMobile, theme }) {
 
       <Grid container spacing={3}>
         {pricingPlans.map((plan) => (
-          <Grid item xs={12} sm={6} md={4} key={plan.title} sx={{ display: "flex" }}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            key={plan.title}
+            sx={{ display: "flex" }}
+          >
             <MotionCard
               variant="outlined"
               sx={{
@@ -395,7 +417,9 @@ function PricingSection({ isMobile, theme }) {
                 display: "flex",
                 flexDirection: "column",
                 flexGrow: 1,
-                borderColor: plan.highlighted ? theme.palette.primary.main : undefined,
+                borderColor: plan.highlighted
+                  ? theme.palette.primary.main
+                  : undefined,
                 boxShadow: plan.highlighted
                   ? "0px 5px 15px rgba(25, 118, 210, 0.2)"
                   : undefined,
@@ -448,17 +472,30 @@ function PricingSection({ isMobile, theme }) {
                 </Typography>
 
                 <Box sx={{ my: 3 }}>
-                  <Typography component="span" variant={isMobile ? "h5" : "h4"} fontWeight="bold">
+                  <Typography
+                    component="span"
+                    variant={isMobile ? "h5" : "h4"}
+                    fontWeight="bold"
+                  >
                     {plan.price}
                   </Typography>
-                  <Typography component="span" variant="subtitle1" color="text.secondary">
+                  <Typography
+                    component="span"
+                    variant="subtitle1"
+                    color="text.secondary"
+                  >
                     {plan.period}
                   </Typography>
                 </Box>
 
                 <List disablePadding sx={{ flexGrow: 1 }}>
                   {plan.features.map((feature) => (
-                    <ListItem key={feature} disablePadding disableGutters sx={{ py: 0.5 }}>
+                    <ListItem
+                      key={feature}
+                      disablePadding
+                      disableGutters
+                      sx={{ py: 0.5 }}
+                    >
                       <ListItemIcon sx={{ minWidth: 36 }}>
                         <motion.div whileHover={{ scale: 1.2 }}>
                           <CheckIcon
@@ -534,7 +571,10 @@ function FAQSection({ isMobile, theme }) {
               {faq.question}
             </Typography>
 
-            <Typography variant={isMobile ? "body2" : "body1"} color="text.secondary">
+            <Typography
+              variant={isMobile ? "body2" : "body1"}
+              color="text.secondary"
+            >
               {faq.answer}
             </Typography>
 
@@ -570,9 +610,14 @@ function CallToActionSection({ isMobile, theme }) {
             >
               Ready to Transform Your Store Workflows?
             </Typography>
-            <Typography variant={isMobile ? "body2" : "body1"} sx={{ mb: 3 }} color="white">
-              Start using MetaMatrix to speed up bulk editing, reduce repetitive work,
-              and improve catalog operations.
+
+            <Typography
+              variant={isMobile ? "body2" : "body1"}
+              sx={{ mb: 3 }}
+              color="white"
+            >
+              Start using MetaMatrix to speed up bulk editing, reduce repetitive
+              work, and improve catalog operations.
             </Typography>
           </Grid>
 
@@ -580,7 +625,10 @@ function CallToActionSection({ isMobile, theme }) {
             item
             xs={12}
             md={4}
-            sx={{ display: "flex", justifyContent: { xs: "center", md: "flex-end" } }}
+            sx={{
+              display: "flex",
+              justifyContent: { xs: "center", md: "flex-end" },
+            }}
           >
             <Button
               variant="contained"
@@ -591,7 +639,13 @@ function CallToActionSection({ isMobile, theme }) {
                 color: "primary.main",
                 "&:hover": { bgcolor: "grey.100" },
               }}
-              onClick={() => window.open("https://youtu.be/1UMtbQG5Z1M", "_blank", "noopener,noreferrer")}
+              onClick={() =>
+                window.open(
+                  "https://youtu.be/1UMtbQG5Z1M",
+                  "_blank",
+                  "noopener,noreferrer"
+                )
+              }
             >
               WATCH DEMO
             </Button>
@@ -607,10 +661,21 @@ const MetaMatrixApp = () => {
   const navigate = useNavigate();
   const theme = useTheme();
 
-  const queryParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
+  const queryParams = useMemo(
+    () => new URLSearchParams(location.search),
+    [location.search]
+  );
+
   const referralCode = queryParams.get("ref");
 
-  const [activePage, setActivePage] = useState(SECTION_KEYS.HERO);
+  const activePage = useMemo(() => {
+    const pathParts = location.pathname.split("/").filter(Boolean);
+    const lastPath = pathParts[pathParts.length - 1];
+    const validSections = Object.values(SECTION_KEYS);
+
+    return validSections.includes(lastPath) ? lastPath : SECTION_KEYS.HERO;
+  }, [location.pathname]);
+
   const [hoverStates, setHoverStates] = useState({});
   const [referralModalOpen, setReferralModalOpen] = useState(false);
   const [storeModalOpen, setStoreModalOpen] = useState(Boolean(referralCode));
@@ -623,7 +688,12 @@ const MetaMatrixApp = () => {
     { key: SECTION_KEYS.HOW_IT_WORKS, label: "How It Works", type: "tab" },
     { key: SECTION_KEYS.PRICING, label: "Pricing", type: "tab" },
     { key: SECTION_KEYS.FAQ, label: "FAQ", type: "tab" },
-    { key: "documentation", label: "Documentation", type: "route", path: "/metametrixDocumentation" },
+    {
+      key: "documentation",
+      label: "Documentation",
+      type: "route",
+      path: "/metametrixDocumentation",
+    },
   ];
 
   const handleHover = (id, isHovering) => {
@@ -631,6 +701,10 @@ const MetaMatrixApp = () => {
       ...prev,
       [id]: isHovering,
     }));
+  };
+
+  const handleSectionChange = (sectionKey) => {
+    navigate(`/metamatrix-app/${sectionKey}`);
   };
 
   const renderActiveSection = () => {
@@ -646,16 +720,30 @@ const MetaMatrixApp = () => {
             theme={appTheme}
           />
         );
+
       case SECTION_KEYS.FEATURES:
         return <FeatureSection isMobile={isMobile} />;
+
       case SECTION_KEYS.HOW_IT_WORKS:
         return <HowItWorksSection isMobile={isMobile} theme={appTheme} />;
+
       case SECTION_KEYS.PRICING:
         return <PricingSection isMobile={isMobile} theme={appTheme} />;
+
       case SECTION_KEYS.FAQ:
         return <FAQSection isMobile={isMobile} theme={appTheme} />;
+
       default:
-        return <HeroSection isMobile={isMobile} hoverStates={hoverStates} onHover={handleHover} onOpenInstall={() => setStoreModalOpen(true)} onOpenReferral={() => setReferralModalOpen(true)} theme={appTheme} />;
+        return (
+          <HeroSection
+            isMobile={isMobile}
+            hoverStates={hoverStates}
+            onHover={handleHover}
+            onOpenInstall={() => setStoreModalOpen(true)}
+            onOpenReferral={() => setReferralModalOpen(true)}
+            theme={appTheme}
+          />
+        );
     }
   };
 
@@ -698,6 +786,7 @@ const MetaMatrixApp = () => {
                   <Avatar
                     variant="rounded"
                     src="https://cdn.shopify.com/app-store/listing_images/0d2faed5eadc2b3043d4da7d9dc6e290/icon/CL_ziN7d8YkDEAE=.png"
+                    alt="MetaMatrix Logo"
                     sx={{
                       width: isMobile ? 24 : 32,
                       height: isMobile ? 24 : 32,
@@ -735,9 +824,16 @@ const MetaMatrixApp = () => {
                     },
                   }}
                 >
-                  <Box sx={{ display: "flex", px: { xs: 2, md: 0 }, minWidth: "fit-content" }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      px: { xs: 2, md: 0 },
+                      minWidth: "fit-content",
+                    }}
+                  >
                     {navigationItems.map((item) => {
-                      const isActive = item.type === "tab" && activePage === item.key;
+                      const isActive =
+                        item.type === "tab" && activePage === item.key;
 
                       return (
                         <MotionButton
@@ -748,7 +844,8 @@ const MetaMatrixApp = () => {
                               navigate(item.path);
                               return;
                             }
-                            setActivePage(item.key);
+
+                            handleSectionChange(item.key);
                           }}
                           variant="text"
                           sx={{
@@ -759,7 +856,9 @@ const MetaMatrixApp = () => {
                             fontWeight: isActive ? 600 : 400,
                             minWidth: "auto",
                             whiteSpace: "nowrap",
-                            color: isActive ? "primary.main" : "text.secondary",
+                            color: isActive
+                              ? "primary.main"
+                              : "text.secondary",
                             borderRadius: 2,
                             "&:hover": { backgroundColor: "action.hover" },
                           }}

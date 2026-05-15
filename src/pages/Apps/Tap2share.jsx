@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   Box,
   Button,
@@ -22,6 +22,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -479,16 +480,26 @@ function CallToActionSection({ isMobile, theme }) {
     </Box>
   );
 }
-
 function Tap2shareContent() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const theme = useTheme();
+
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const [activePage, setActivePage] = useState(SECTION_KEYS.HERO);
+  const activePage = useMemo(() => {
+    const pathParts = location.pathname.split("/").filter(Boolean);
+    const lastPath = pathParts[pathParts.length - 1];
+
+    const validSections = Object.values(SECTION_KEYS);
+
+    return validSections.includes(lastPath) ? lastPath : SECTION_KEYS.HERO;
+  }, [location.pathname]);
+
   const [hoverStates, setHoverStates] = useState({});
 
   const navigationItems = [
-    { key: SECTION_KEYS.HERO, label: "Home" },
+    { key: SECTION_KEYS.HERO, label: "Hero" },
     { key: SECTION_KEYS.FEATURES, label: "Features" },
     { key: SECTION_KEYS.HOW_IT_WORKS, label: "How It Works" },
     { key: SECTION_KEYS.PRICING, label: "Pricing" },
@@ -501,6 +512,10 @@ function Tap2shareContent() {
       ...prev,
       [id]: isHovering,
     }));
+  };
+
+  const handleSectionChange = (sectionKey) => {
+    navigate(`/tap2share-app/${sectionKey}`);
   };
 
   const renderActiveSection = () => {
@@ -614,7 +629,7 @@ function Tap2shareContent() {
                       <MotionButton
                         key={item.key}
                         color="inherit"
-                        onClick={() => setActivePage(item.key)}
+                        onClick={() => handleSectionChange(item.key)}
                         variant="text"
                         sx={{
                           mx: 0.5,
@@ -653,8 +668,8 @@ function Tap2shareContent() {
             {(activePage === SECTION_KEYS.HERO ||
               activePage === SECTION_KEYS.FEATURES ||
               activePage === SECTION_KEYS.HOW_IT_WORKS) && (
-              <CallToActionSection isMobile={isMobile} theme={appTheme} />
-            )}
+                <CallToActionSection isMobile={isMobile} theme={appTheme} />
+              )}
           </Box>
         </MotionPaper>
       </Container>

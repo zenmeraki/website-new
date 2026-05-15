@@ -28,6 +28,7 @@ import ZenoChatLanding from './pages/Apps/ZenoChat'
 
 
 
+
 // Global theme for your entire application
 const theme = createTheme({
   palette: {
@@ -82,15 +83,15 @@ function App() {
       <CssBaseline />
       <Routes>
 
-        <Route path='/deskribeDocumentation' element={<DeskribeDocs/>}/>
-        <Route path='/metametrixDocumentation' element={<MetametrixDocs/>}/>
-        <Route path='/BPOServices' element={<BPOServices/>}/>
+        <Route path='/deskribeDocumentation' element={<DeskribeDocs />} />
+        <Route path='/metametrixDocumentation' element={<MetametrixDocs />} />
+        <Route path='/BPOServices' element={<BPOServices />} />
 
         <Route path="/" element={<Home />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/careers" element={<Careers />} />
         <Route path="/contact" element={<Contact />} />
-        
+
         {/* Expertise Routes */}
         <Route path="/shopify-app" element={<ShopifyApp />} />
         <Route path="/custom-store" element={<CustomShopify />} />
@@ -98,17 +99,17 @@ function App() {
         <Route path="/website-management" element={<Website />} />
         <Route path="/digital-marketing" element={<DigitalMarketing />} />
         <Route path="/e-commerce-management" element={<Ecommerce />} />
-        <Route path='/bpo' element={<BPOSection/>}/>
-        
+        <Route path='/bpo' element={<BPOSection />} />
+
         {/* Apps Routes */}
-        <Route path="/metamatrix-app" element={<MetaMatrixApp />} />
-        <Route path="/multivendor-app" element={<MultiVendorApp />} />
-        <Route path="/tap2share-app" element={<Tap2shareApp />} />
-        <Route path="/visual-search-app" element={<VisualSearchPage />} />
-       <Route path='/deskribe-app' element={<DeskribeApp />}/>
-       <Route path='/conversify-app' element={<ConversifyApp/>}/>
-       <Route path='/edutech-app' element={<EdutechApp/>}/>
-       <Route path='/zenochat-app' element={<ZenoChatLanding/>}/>   
+        <Route path="/metamatrix-app/*" element={<MetaMatrixApp />} />
+        <Route path="/multivendor-app/*" element={<MultiVendorApp />} />
+        <Route path="/tap2share-app/*" element={<Tap2shareApp />} />
+        <Route path="/visual-search-app/*" element={<VisualSearchPage />} />
+        <Route path="/deskribe-app/*" element={<DeskribeApp />} />
+        <Route path="/conversify-app/*" element={<ConversifyApp />} />
+        <Route path="/edutech-app/*" element={<EdutechApp />} />
+        <Route path="/zenochat-app/*" element={<ZenoChatLanding />} />
       </Routes>
     </ThemeProvider>
   )

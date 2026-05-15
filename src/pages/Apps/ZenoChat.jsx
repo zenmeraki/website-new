@@ -4,7 +4,7 @@ import React, { useMemo, useState } from "react";
 import { Avatar, Box, Button, Container, Typography, useMediaQuery } from "@mui/material";
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import { motion, AnimatePresence } from "framer-motion";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -55,17 +55,18 @@ const SECTION_KEYS = {
 };
 
 const navigationItems = [
-  { key: SECTION_KEYS.HERO,         label: "Hero" },
-  { key: SECTION_KEYS.FEATURES,     label: "Features" },
+  { key: SECTION_KEYS.HERO, label: "Hero" },
+  { key: SECTION_KEYS.FEATURES, label: "Features" },
   { key: SECTION_KEYS.HOW_IT_WORKS, label: "How It Works" },
-  { key: SECTION_KEYS.PRICING,      label: "Pricing" },
-  { key: SECTION_KEYS.FAQ,          label: "FAQ" },
-  { key: SECTION_KEYS.PRIVACY,      label: "Privacy Policy" },
-  { key: SECTION_KEYS.TERMS,        label: "Terms & Conditions" },
+  { key: SECTION_KEYS.PRICING, label: "Pricing" },
+  { key: SECTION_KEYS.FAQ, label: "FAQ" },
+  { key: SECTION_KEYS.PRIVACY, label: "Privacy Policy" },
+  { key: SECTION_KEYS.TERMS, label: "Terms & Conditions" },
 ];
 
 function ZenoChatContent() {
   const location = useLocation();
+  const navigate = useNavigate();
   const theme = useTheme();
 
   const queryParams = useMemo(
@@ -74,15 +75,27 @@ function ZenoChatContent() {
   );
   const referralCode = queryParams.get("ref");
 
-  const [activePage, setActivePage]       = useState(SECTION_KEYS.HERO);
-  const [hoverStates, setHoverStates]     = useState({});
+  const activePage = useMemo(() => {
+    const pathParts = location.pathname.split("/").filter(Boolean);
+    const lastPath = pathParts[pathParts.length - 1];
+
+    const validSections = Object.values(SECTION_KEYS);
+
+    return validSections.includes(lastPath) ? lastPath : SECTION_KEYS.HERO;
+  }, [location.pathname]);
+
+  const [hoverStates, setHoverStates] = useState({});
   const [referralModalOpen, setReferralModalOpen] = useState(false);
-  const [storeModalOpen, setStoreModalOpen]       = useState(Boolean(referralCode));
+  const [storeModalOpen, setStoreModalOpen] = useState(Boolean(referralCode));
 
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleHover = (id, isHovering) =>
     setHoverStates((prev) => ({ ...prev, [id]: isHovering }));
+
+  const handleSectionChange = (sectionKey) => {
+    navigate(`/zenochat-app/${sectionKey}`);
+  };
 
   const renderActiveSection = () => {
     const sharedProps = { isMobile, theme: appTheme };
@@ -218,24 +231,24 @@ function ZenoChatContent() {
                       <motion.div key={item.key} whileHover={{ scale: 1.05, y: -2 }}>
                         <Button
                           color="inherit"
-                          onClick={() => setActivePage(item.key)}
+                          onClick={() => handleSectionChange(item.key)}
                           variant="text"
                           sx={{
-  mx: 0.5,
-  py: 1,
-  px: 2,
-  textTransform: "none",
-  fontWeight: isActive ? 600 : 400,
-  minWidth: "auto",
-  whiteSpace: "nowrap",
-  color: isActive
-    ? "primary.main"
-    : isLegal
-    ? "text.disabled"
-    : "text.secondary",
-  borderRadius: 2,
-  "&:hover": { backgroundColor: "action.hover" },
-}}
+                            mx: 0.5,
+                            py: 1,
+                            px: 2,
+                            textTransform: "none",
+                            fontWeight: isActive ? 600 : 400,
+                            minWidth: "auto",
+                            whiteSpace: "nowrap",
+                            color: isActive
+                              ? "primary.main"
+                              : isLegal
+                                ? "text.disabled"
+                                : "text.secondary",
+                            borderRadius: 2,
+                            "&:hover": { backgroundColor: "action.hover" },
+                          }}
                         >
                           {item.label}
                         </Button>
