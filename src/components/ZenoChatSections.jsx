@@ -776,7 +776,7 @@ export function CallToActionSection({ isMobile, theme }) {
               justifyContent: { xs: "center", md: "flex-end" },
             }}
           >
-            <Button
+            {/* <Button
               variant="contained"
               size={isMobile ? "medium" : "large"}
               fullWidth={isMobile}
@@ -795,7 +795,7 @@ export function CallToActionSection({ isMobile, theme }) {
               }
             >
               WATCH DEMO
-            </Button>
+            </Button> */}
           </Grid>
         </Grid>
       </Container>
