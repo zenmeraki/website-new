@@ -296,7 +296,6 @@ const GettingStarted = () => (
     </Typography>
     <StepCard num="1" title="Connect your store" desc="On first launch, Deskribe AI automatically connects to your Shopify store using the approved OAuth credentials." />
     <StepCard num="2" title="Choose your tone of voice" desc="Pick a default writing tone (professional, casual, playful, etc.) that matches your brand." />
-    <StepCard num="3" title="Set language preference" desc="Choose the language in which content will be generated (English, French, Spanish, and more)." />
     <StepCard num="4" title="Generate your first description" desc="Select any product from your catalog and hit Generate — your first AI-written description is ready instantly." />
 
     <Alert severity="info" sx={{ mt: 3, backgroundColor: "#0d2818", border: "1px solid #1e3a2a", color: "#00e5a0", fontFamily: "'IBM Plex Mono', monospace", fontSize: "0.8rem" }}>
@@ -383,7 +382,7 @@ const Settings = () => (
 
     {[
       { setting: "Tone of Voice", options: "Professional, Casual, Playful, Luxury, Minimalist", desc: "Sets the writing style used across all generated content." },
-      { setting: "Language", options: "English, French, Spanish, German, and more", desc: "The language in which descriptions and SEO content will be generated." },
+      { setting: "Language", options: "English", desc: "The language in which descriptions and SEO content will be generated." },
       { setting: "Custom Instructions", options: "Free text field", desc: "Add brand-specific keywords, phrases to avoid, or specific product features to always mention." },
       { setting: "Default Meta Length", options: "Short / Standard / Long", desc: "Controls the length of generated meta titles and descriptions." },
     ].map((row, i) => (
@@ -402,60 +401,326 @@ const Settings = () => (
   </Box>
 );
 
-const Pricing = () => (
-  <Box>
-    <SectionHeader num="06" title="Pricing & Plans" />
-    <Typography color="text.secondary" paragraph sx={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: "0.88rem", lineHeight: 1.9 }}>
-      Deskribe AI offers flexible plans designed to grow with your store.
-    </Typography>
+const Pricing = () => {
+  const plans = [
+    {
+      plan: "Free",
+      subtitle: "Get started with AI-powered descriptions",
+      price: "Free",
+      oldPrice: null,
+      billing: null,
+      badge: "Current Plan",
+      badgeColor: "success",
+      borderColor: "#34d399",
+      highlighted: false,
+      features: [
+        { text: "10 AI descriptions / day", enabled: true },
+        { text: "1 store connected", enabled: true },
+        {
+          text: "2 tones & 2 formats (Casual, Minimalist / Paragraph, Bullets)",
+          enabled: true,
+        },
+      ],
+    },
+    {
+      plan: "Basic Plan",
+      subtitle: "Perfect for growing stores",
+      price: "$9.99",
+      oldPrice: "$14.99",
+      billing: "$6.99/mo billed yearly",
+      badge: null,
+      borderColor: "#21262d",
+      highlighted: false,
+      features: [
+        { text: "200 AI descriptions / day", enabled: true },
+        { text: "All tones & formats (5 styles, 3 formats)", enabled: true },
+        { text: "Email support", enabled: true },
+        { text: "SEO optimization", enabled: true },
+        { text: "5 keyword suggestions / day", enabled: true },
+        { text: "Bulk generation (20/batch)", enabled: true },
+      ],
+    },
+    {
+      plan: "Advanced Plan",
+      subtitle: "For scaling product catalogs",
+      price: "$17.99",
+      oldPrice: "$24.99",
+      billing: "$12.5/mo billed yearly",
+      badge: "Most Popular",
+      badgeColor: "blue",
+      borderColor: "#60a5fa",
+      highlighted: true,
+      features: [
+        { text: "1,000 AI descriptions / day", enabled: true },
+        { text: "All tones & formats (5 styles, 3 formats)", enabled: true },
+        { text: "Priority email support", enabled: true },
+        { text: "Advanced SEO optimization", enabled: true },
+        { text: "15 keyword suggestions / day", enabled: true },
+        { text: "Bulk generation (50/batch)", enabled: true },
+        { text: "Custom writing style templates", enabled: true },
+      ],
+    },
+    {
+      plan: "Pro Plan",
+      subtitle: "Unlimited power for large catalogs",
+      price: "$24.99",
+      oldPrice: "$34.99",
+      billing: "$17.49/mo billed yearly",
+      badge: null,
+      borderColor: "#00e5a0",
+      highlighted: false,
+      features: [
+        { text: "Unlimited AI descriptions", enabled: true },
+        { text: "All templates + custom", enabled: true },
+        { text: "24/7 priority support", enabled: true },
+        { text: "Advanced SEO + keywords", enabled: true },
+        { text: "50 keyword suggestions / day", enabled: true },
+        { text: "Unlimited bulk generation", enabled: true },
+        { text: "Custom writing style templates", enabled: true },
+      ],
+    },
+  ];
 
-    <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, gap: 2 }}>
-      {[
-        {
-          plan: "Free",
-          price: "$0 / month",
-          features: ["10 generations / month", "Product descriptions", "Basic SEO content", "Direct Shopify publish"],
-          highlight: false,
-        },
-        {
-          plan: "Pro",
-          price: "$19 / month",
-          features: ["Unlimited generations", "Advanced SEO (meta, tags)", "Custom tone & language", "Brand instructions", "Priority support"],
-          highlight: true,
-        },
-      ].map((p) => (
-        <Box
-          key={p.plan}
-          sx={{
-            p: 3,
-            backgroundColor: p.highlight ? "rgba(0,229,160,0.05)" : "#161b22",
-            border: p.highlight ? "2px solid #00e5a0" : "1px solid #21262d",
-            borderRadius: "12px",
-            position: "relative",
-          }}
-        >
-          {p.highlight && (
-            <Chip label="RECOMMENDED" size="small" sx={{ position: "absolute", top: -12, left: 16, backgroundColor: "#00e5a0", color: "#0d1117", fontWeight: 700, fontSize: "0.65rem" }} />
-          )}
-          <Typography variant="h5" fontWeight={700} gutterBottom>
-            {p.plan}
-          </Typography>
-          <Typography variant="h4" sx={{ color: "#00e5a0", mb: 2, fontFamily: "'IBM Plex Mono', monospace" }}>
-            {p.price}
-          </Typography>
-          {p.features.map((f) => (
-            <Box key={f} sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}>
-              <CheckCircleOutlineIcon sx={{ fontSize: 16, color: "#00e5a0" }} />
-              <Typography variant="body2" color="text.secondary" sx={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: "0.8rem" }}>
-                {f}
+  return (
+    <Box sx={{ width: "100%" }}>
+      <SectionHeader num="06" title="Pricing & Plans" />
+
+      <Typography
+        color="text.secondary"
+        paragraph
+        sx={{
+          fontFamily: "'IBM Plex Mono', monospace",
+          fontSize: "0.88rem",
+          lineHeight: 1.9,
+          mb: 3,
+        }}
+      >
+        Choose the plan that fits your catalog size and AI content workflow.
+      </Typography>
+
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: {
+            xs: "1fr",
+            sm: "repeat(2, minmax(0, 1fr))",
+            lg: "repeat(4, minmax(220px, 1fr))",
+          },
+          gap: 2.5,
+          alignItems: "stretch",
+          width: "100%",
+        }}
+      >
+        {plans.map((p) => (
+          <Box
+            key={p.plan}
+            sx={{
+              position: "relative",
+              width: "100%",
+              minWidth: 0,
+              height: "100%",
+              minHeight: 560,
+              p: 2.5,
+              backgroundColor: p.highlighted
+                ? "rgba(96,165,250,0.06)"
+                : "#161b22",
+              border: `2px solid ${p.borderColor}`,
+              borderRadius: "14px",
+              display: "flex",
+              flexDirection: "column",
+              boxSizing: "border-box",
+              overflow: "hidden",
+              transition: "all 0.2s ease",
+              "&:hover": {
+                transform: "translateY(-3px)",
+                borderColor: p.highlighted ? "#60a5fa" : "#00e5a0",
+              },
+            }}
+          >
+            <Box sx={{ minHeight: 36, mb: 1 }}>
+              {p.badge && (
+                <Chip
+                  label={p.badge}
+                  size="small"
+                  sx={{
+                    backgroundColor:
+                      p.badgeColor === "success"
+                        ? "rgba(52,211,153,0.12)"
+                        : "rgba(96,165,250,0.12)",
+                    color:
+                      p.badgeColor === "success" ? "#34d399" : "#60a5fa",
+                    border:
+                      p.badgeColor === "success"
+                        ? "1px solid rgba(52,211,153,0.35)"
+                        : "1px solid rgba(96,165,250,0.35)",
+                    fontWeight: 700,
+                    fontFamily: "'IBM Plex Mono', monospace",
+                  }}
+                />
+              )}
+            </Box>
+
+            <Box sx={{ minHeight: 82 }}>
+              <Typography
+                variant="overline"
+                sx={{
+                  color: "#8b949e",
+                  letterSpacing: "0.12em",
+                  fontWeight: 800,
+                  fontFamily: "'IBM Plex Mono', monospace",
+                }}
+              >
+                {p.plan}
+              </Typography>
+
+              <Typography
+                color="text.secondary"
+                sx={{
+                  mt: 1,
+                  fontFamily: "'IBM Plex Mono', monospace",
+                  fontSize: "0.78rem",
+                  lineHeight: 1.7,
+                }}
+              >
+                {p.subtitle}
               </Typography>
             </Box>
-          ))}
-        </Box>
-      ))}
+
+            <Box
+
+              sx={{
+                minHeight: 86,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "flex-start",
+                mt: 1,
+              }}
+            >
+              <Box sx={{ display: "flex", alignItems: "baseline", gap: 1 }}>
+                {p.oldPrice && (
+                  <Typography
+                    component="span"
+                    sx={{
+                      color: "#8b949e",
+                      textDecoration: "line-through",
+                      fontFamily: "'IBM Plex Mono', monospace",
+                      fontSize: "0.86rem",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {p.oldPrice}
+                  </Typography>
+                )}
+
+                <Typography
+                  component="span"
+                  sx={{
+                    color: "#e6edf3",
+                    fontSize: p.price === "Free" ? "2rem" : "2.2rem",
+                    fontWeight: 800,
+                    fontFamily: "'Space Grotesk', sans-serif",
+                    lineHeight: 1,
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {p.price}
+                </Typography>
+
+                {p.price !== "Free" && (
+                  <Typography
+                    component="span"
+                    sx={{
+                      color: "#8b949e",
+                      fontFamily: "'IBM Plex Mono', monospace",
+                      fontSize: "0.78rem",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    / mo
+                  </Typography>
+                )}
+              </Box>
+
+              {p.billing && (
+                <Typography
+                  sx={{
+                    mt: 1.2,
+                    color: "#8b949e",
+                    fontFamily: "'IBM Plex Mono', monospace",
+                    fontSize: "0.76rem",
+                    fontWeight: 600,
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {p.billing}
+                </Typography>
+              )}
+            </Box>
+
+            <Divider sx={{ borderColor: "#21262d", mb: 2 }} />
+
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 1.5,
+                flex: 1,
+              }}
+            >
+              {p.features.map((feature) => (
+                <Box
+                  key={feature.text}
+                  sx={{
+                    display: "flex",
+                    gap: 1.2,
+                    alignItems: "flex-start",
+                    opacity: feature.enabled ? 1 : 0.38,
+                    minWidth: 0,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: 20,
+                      height: 20,
+                      minWidth: 20,
+                      borderRadius: "50%",
+                      mt: "2px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      backgroundColor: feature.enabled
+                        ? "rgba(52,211,153,0.14)"
+                        : "rgba(148,163,184,0.12)",
+                      color: feature.enabled ? "#34d399" : "#8b949e",
+                      fontSize: "0.75rem",
+                      fontWeight: 800,
+                    }}
+                  >
+                    {feature.enabled ? "✓" : "×"}
+                  </Box>
+
+                  <Typography
+                    color="text.secondary"
+                    sx={{
+                      fontFamily: "'IBM Plex Mono', monospace",
+                      fontSize: "0.8rem",
+                      lineHeight: 1.65,
+                      fontWeight: feature.enabled ? 600 : 500,
+                      minWidth: 0,
+                      overflowWrap: "break-word",
+                    }}
+                  >
+                    {feature.text}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        ))}
+      </Box>
     </Box>
-  </Box>
-);
+  );
+};
 
 const FAQs = () => {
   const faqs = [
@@ -557,12 +822,45 @@ const Support = () => (
       Our team is here to help. Reach out through any of the channels below.
     </Typography>
 
-    <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" }, gap: 2, mt: 2 }}>
+    <Box
+      sx={{
+        display: "grid",
+        gridTemplateColumns: {
+          xs: "minmax(0, 1fr)",
+          sm: "repeat(2, minmax(0, 1fr))",
+          lg: "repeat(4, minmax(0, 1fr))",
+        },
+        gridAutoRows: "1fr",
+        gap: 2.5,
+        alignItems: "stretch",
+        width: "100%",
+      }}
+    >
       {[
-        { label: "Email Support", value: "support@deskribeai.com", desc: "We respond within 24 hours on business days.", icon: "✉️" },
-        { label: "Live Chat", value: "Available in-app", desc: "Click the chat icon inside the app for real-time help.", icon: "💬" },
-        { label: "Website", value: "www.deskribeai.com", desc: "Visit our website for updates, blog posts, and announcements.", icon: "🌐" },
-        { label: "Shopify App Store", value: "Leave a review", desc: "Your feedback helps us improve. We read every review!", icon: "⭐" },
+        {
+          label: "Email Support",
+          value: "zenmerakihelp@gmail.com",
+          desc: "We respond within 24 hours on business days.",
+          icon: "✉️",
+        },
+        {
+          label: "24/7 Support",
+          value: "Available anytime",
+          desc: "Get help whenever you need assistance with the app.",
+          icon: "🛟",
+        },
+        {
+          label: "Website",
+          value: "www.zenmeraki.com",
+          desc: "Visit our website for updates, blog posts, and announcements.",
+          icon: "🌐",
+        },
+        {
+          label: "Shopify App Store",
+          value: "Leave a review",
+          desc: "Your feedback helps us improve. We read every review!",
+          icon: "⭐",
+        },
       ].map((s, i) => (
         <Box key={i} sx={{ p: 3, backgroundColor: "#161b22", border: "1px solid #21262d", borderRadius: "10px", transition: "all 0.2s", "&:hover": { borderColor: "#00e5a0" } }}>
           <Typography sx={{ fontSize: "1.8rem", mb: 1 }}>{s.icon}</Typography>
@@ -592,9 +890,16 @@ const SECTIONS = { overview: <Overview />, "getting-started": <GettingStarted />
 
 // ── App ───────────────────────────────────────────────────────────────────────
 
+
+
+
 export default function DeskribeAIDocs() {
   const [active, setActive] = useState("overview");
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const wideSections = ["pricing", "support", "overview", "settings"];
+  const isWideSection = wideSections.includes(active);
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -718,9 +1023,18 @@ export default function DeskribeAIDocs() {
             flex: 1,
             minWidth: 0,
             mt: isMobile ? "64px" : 0,
-            p: { xs: 2.5, md: 5 },
-            maxWidth: 860,
-            mx: "auto",
+
+            pl: { xs: 2.5, md: 5 },
+            pt: { xs: 2.5, md: 5 },
+            pr: { xs: 2.5, md: 5 },
+            pb: { xs: 2.5, md: 5 },
+
+            // pricing needs more width
+            maxWidth: isWideSection ? 1240 : 860,
+            width: "100%",
+
+            // important: do NOT center all content
+            mx: 0,
           }}
         >
           {SECTIONS[active]}
