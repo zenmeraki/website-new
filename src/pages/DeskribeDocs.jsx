@@ -304,6 +304,7 @@ const GettingStarted = () => (
   </Box>
 );
 
+
 const CoreFeatures = () => (
   <Box>
     <SectionHeader num="03" title="Core Features" />
