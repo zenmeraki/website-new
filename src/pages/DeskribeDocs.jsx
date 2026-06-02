@@ -898,17 +898,17 @@ export default function DeskribeAIDocs() {
   const [active, setActive] = useState("overview");
   const [mobileOpen, setMobileOpen] = useState(false);
 
-const wideSections = [
-  "overview",
-  "getting-started",
-  "core-features",
-  "how-to-use",
-  "settings",
-  "pricing",
-  "faqs",
-  "troubleshooting",
-  "support",
-];
+  const wideSections = [
+    "overview",
+    "getting-started",
+    "core-features",
+    "how-to-use",
+    "settings",
+    "pricing",
+    "faqs",
+    "troubleshooting",
+    "support",
+  ];
   const isWideSection = wideSections.includes(active);
 
   const theme = useTheme();

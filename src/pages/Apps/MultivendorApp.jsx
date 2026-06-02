@@ -54,6 +54,7 @@ const SECTION_KEYS = {
   FEATURES: "features",
   HOW_IT_WORKS: "how-it-works",
   FAQ: "faq",
+  PRIVACY: "privacy",
 };
 
 const featureContent = {
@@ -327,6 +328,121 @@ function FAQSection({ isMobile, theme }) {
   );
 }
 
+function PrivacySection({ isMobile, theme }) {
+  const privacyItems = [
+    {
+      title: "Shopify Store Data",
+      desc:
+        "MultiVendor may access Shopify store data required to operate marketplace features, such as products, collections, orders, inventory, vendor-related product details, and store configuration.",
+    },
+    {
+      title: "Vendor Information",
+      desc:
+        "When vendors apply or are invited to sell on your marketplace, MultiVendor may process vendor details such as name, email address, business information, application status, assigned products, and dashboard activity.",
+    },
+    {
+      title: "Product and Inventory Management",
+      desc:
+        "Vendors may manage product listings, inventory, pricing, and related product information through their vendor dashboard, while the store owner keeps marketplace oversight and approval control.",
+    },
+    {
+      title: "Commission and Payout Data",
+      desc:
+        "MultiVendor may process order values, commission rules, vendor earnings, payout status, and related transaction records to help calculate commissions and support marketplace payout workflows.",
+    },
+    {
+      title: "Data Use and Security",
+      desc:
+        "Marketplace data is used only to provide vendor management, product listing, commission tracking, analytics, support, and app reliability features. We use reasonable safeguards to protect store, vendor, and marketplace data.",
+    },
+  ];
+
+  return (
+    <Box sx={{ py: { xs: 2, md: 4 } }}>
+      <Typography
+        variant={isMobile ? "h5" : "h4"}
+        component="h2"
+        fontWeight="bold"
+        gutterBottom
+        sx={{ mb: 2 }}
+      >
+       Privacy Policy
+      </Typography>
+
+      <Typography
+        variant={isMobile ? "body2" : "body1"}
+        color="text.secondary"
+        paragraph
+        sx={{ mb: 4, maxWidth: 900 }}
+      >
+        This privacy page explains how MultiVendor handles Shopify store data,
+        vendor information, product listings, inventory, commission tracking,
+        payout workflows, and marketplace management features.
+      </Typography>
+
+      <Grid container spacing={3}>
+        {privacyItems.map((item) => (
+          <Grid item xs={12} md={6} key={item.title}>
+            <MotionCard
+              variant="outlined"
+              sx={{
+                height: "100%",
+                borderRadius: 2,
+                borderColor: "divider",
+              }}
+              whileHover={{
+                y: -4,
+                borderColor: theme.palette.primary.main,
+                boxShadow: "0px 8px 24px rgba(14, 59, 57, 0.14)",
+              }}
+            >
+              <CardContent sx={{ p: { xs: 2, md: 3 } }}>
+                <Typography
+                  variant={isMobile ? "subtitle1" : "h6"}
+                  fontWeight="bold"
+                  gutterBottom
+                >
+                  {item.title}
+                </Typography>
+
+                <Typography
+                  variant={isMobile ? "body2" : "body1"}
+                  color="text.secondary"
+                >
+                  {item.desc}
+                </Typography>
+              </CardContent>
+            </MotionCard>
+          </Grid>
+        ))}
+      </Grid>
+
+      <Box
+        sx={{
+          mt: 4,
+          p: { xs: 2, md: 3 },
+          borderRadius: 2,
+          bgcolor: "rgba(14, 59, 57, 0.08)",
+          border: "1px solid rgba(14, 59, 57, 0.18)",
+        }}
+      >
+        <Typography variant="h6" fontWeight="bold" gutterBottom>
+          Contact for Privacy Requests
+        </Typography>
+
+        <Typography variant="body2" color="text.secondary">
+          For privacy questions, vendor data requests, marketplace data deletion
+          requests, or MultiVendor support, contact us at{" "}
+          <Box component="span" sx={{ color: "primary.main", fontWeight: 700 }}>
+            zenmerakihelp@gmail.com
+          </Box>
+          .
+        </Typography>
+      </Box>
+    </Box>
+  );
+}
+
 function CallToActionSection({ isMobile, theme }) {
   return (
     <Box
@@ -434,6 +550,7 @@ function MultiVendorContent() {
     { key: SECTION_KEYS.FEATURES, label: "Features" },
     { key: SECTION_KEYS.HOW_IT_WORKS, label: "How It Works" },
     { key: SECTION_KEYS.FAQ, label: "FAQ" },
+    { key: SECTION_KEYS.PRIVACY, label: " Privacy Policy" },
   ];
 
   const handleSectionChange = (sectionKey) => {
@@ -451,6 +568,8 @@ function MultiVendorContent() {
         return <HowItWorksSection isMobile={isMobile} theme={appTheme} />;
       case SECTION_KEYS.FAQ:
         return <FAQSection isMobile={isMobile} theme={appTheme} />;
+      case SECTION_KEYS.PRIVACY:
+        return <PrivacySection isMobile={isMobile} theme={appTheme} />;
       default:
         return <HeroSection isMobile={isMobile} />;
     }

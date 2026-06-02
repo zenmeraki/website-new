@@ -55,6 +55,7 @@ const SECTION_KEYS = {
   HOW_IT_WORKS: "how-it-works",
   PRICING: "pricing",
   FAQ: "faq",
+  PRIVACY: "privacy",
   CTA: "cta",
 };
 
@@ -430,6 +431,121 @@ function FAQSection({ isMobile, theme }) {
   );
 }
 
+function PrivacySection({ isMobile, theme }) {
+  const privacyItems = [
+    {
+      title: "Shopify Product Data",
+      desc:
+        "Tap2share may access product information required to create shareable product links, such as product title, product URL, product image, product description, price display, and related storefront details.",
+    },
+    {
+      title: "Social Sharing Buttons",
+      desc:
+        "When Tap2share is installed, sharing icons such as WhatsApp, Facebook, Instagram, and other supported platforms may appear on product pages so customers can share products with one tap.",
+    },
+    {
+      title: "Theme and Storefront Integration",
+      desc:
+        "Tap2share may use Shopify theme app extension or storefront placement settings to display share buttons below or near product customization/product detail sections.",
+    },
+    {
+      title: "Customer Sharing Action",
+      desc:
+        "When a customer taps a share icon, the selected platform may open with product details or a product link. The actual sharing action happens through the customer’s chosen social platform.",
+    },
+    {
+      title: "Data Use and Security",
+      desc:
+        "Product and storefront data is used only to provide sharing features, improve app reliability, support troubleshooting, and prevent misuse. Tap2share does not directly collect or store customer payment details.",
+    },
+  ];
+
+  return (
+    <Box sx={{ py: { xs: 2, md: 4 } }}>
+      <Typography
+        variant={isMobile ? "h5" : "h4"}
+        component="h2"
+        fontWeight="bold"
+        gutterBottom
+        sx={{ mb: 2 }}
+      >
+         Privacy Policy
+      </Typography>
+
+      <Typography
+        variant={isMobile ? "body2" : "body1"}
+        color="text.secondary"
+        paragraph
+        sx={{ mb: 4, maxWidth: 900 }}
+      >
+        This privacy page explains how Tap2share handles Shopify product data,
+        storefront share buttons, product links, and one-tap social sharing
+        features.
+      </Typography>
+
+      <Grid container spacing={3}>
+        {privacyItems.map((item) => (
+          <Grid item xs={12} md={6} key={item.title}>
+            <MotionCard
+              variant="outlined"
+              sx={{
+                height: "100%",
+                borderRadius: 2,
+                borderColor: "divider",
+              }}
+              whileHover={{
+                y: -4,
+                borderColor: theme.palette.primary.main,
+                boxShadow: "0px 8px 24px rgba(14, 59, 57, 0.14)",
+              }}
+            >
+              <CardContent sx={{ p: { xs: 2, md: 3 } }}>
+                <Typography
+                  variant={isMobile ? "subtitle1" : "h6"}
+                  fontWeight="bold"
+                  gutterBottom
+                >
+                  {item.title}
+                </Typography>
+
+                <Typography
+                  variant={isMobile ? "body2" : "body1"}
+                  color="text.secondary"
+                >
+                  {item.desc}
+                </Typography>
+              </CardContent>
+            </MotionCard>
+          </Grid>
+        ))}
+      </Grid>
+
+      <Box
+        sx={{
+          mt: 4,
+          p: { xs: 2, md: 3 },
+          borderRadius: 2,
+          bgcolor: "rgba(14, 59, 57, 0.08)",
+          border: "1px solid rgba(14, 59, 57, 0.18)",
+        }}
+      >
+        <Typography variant="h6" fontWeight="bold" gutterBottom>
+          Contact for Privacy Requests
+        </Typography>
+
+        <Typography variant="body2" color="text.secondary">
+          For privacy questions, data deletion requests, or Tap2share support,
+          contact us at{" "}
+          <Box component="span" sx={{ color: "primary.main", fontWeight: 700 }}>
+            zenmerakihelp@gmail.com
+          </Box>
+          .
+        </Typography>
+      </Box>
+    </Box>
+  );
+}
+
 function CallToActionSection({ isMobile, theme }) {
   return (
     <Box
@@ -504,6 +620,7 @@ function Tap2shareContent() {
     { key: SECTION_KEYS.HOW_IT_WORKS, label: "How It Works" },
     { key: SECTION_KEYS.PRICING, label: "Pricing" },
     { key: SECTION_KEYS.FAQ, label: "FAQ" },
+    { key: SECTION_KEYS.PRIVACY, label: " Privacy Policy" },
     { key: SECTION_KEYS.CTA, label: "Get Started" },
   ];
 
@@ -530,6 +647,8 @@ function Tap2shareContent() {
         return <PricingSection isMobile={isMobile} theme={appTheme} />;
       case SECTION_KEYS.FAQ:
         return <FAQSection isMobile={isMobile} theme={appTheme} />;
+      case SECTION_KEYS.PRIVACY:
+        return <PrivacySection isMobile={isMobile} theme={appTheme} />;
       case SECTION_KEYS.CTA:
         return <CallToActionSection isMobile={isMobile} theme={appTheme} />;
       default:

@@ -61,6 +61,7 @@ const SECTION_KEYS = {
   HOW_IT_WORKS: "how-it-works",
   PRICING: "pricing",
   FAQ: "faq",
+  PRIVACY: "privacy",
 };
 
 const featureContent = {
@@ -572,6 +573,124 @@ function FAQSection({ isMobile, theme }) {
   );
 }
 
+
+//privacy
+
+function PrivacySection({ isMobile, theme }) {
+  const privacyItems = [
+    {
+      title: "Text You Submit",
+      desc:
+        "Conversify processes the text, sentences, paragraphs, or documents you enter to provide humanizing, AI detection, plagiarism checking, scoring, and content improvement features.",
+    },
+    {
+      title: "Humanize Feature",
+      desc:
+        "When you use the Humanize tool, Conversify analyzes your submitted text, gives a human-like score where applicable, and may rewrite the content to make it clearer, more natural, and less robotic.",
+    },
+    {
+      title: "AI Detection",
+      desc:
+        "Conversify analyzes submitted content and provides an estimated percentage or score showing how likely the text may be AI-generated. These results are only estimates and may not always be fully accurate.",
+    },
+    {
+      title: "Plagiarism Checking",
+      desc:
+        "Conversify may compare submitted text against available reference data or similarity-checking systems to help identify copied, duplicate, or highly similar content.",
+    },
+    {
+      title: "Data Use and Security",
+      desc:
+        "Submitted text is used only to generate requested results. Users should avoid entering sensitive information such as passwords, payment details, private IDs, legal secrets, or confidential business data. We use reasonable safeguards to protect submitted content and related analysis results.",
+    },
+  ];
+
+  return (
+    <Box sx={{ py: { xs: 2, md: 4 } }}>
+      <Typography
+        variant={isMobile ? "h5" : "h4"}
+        component="h2"
+        fontWeight="bold"
+        gutterBottom
+        sx={{ mb: 2 }}
+      >
+        Privacy Policy
+      </Typography>
+
+      <Typography
+        variant={isMobile ? "body2" : "body1"}
+        color="text.secondary"
+        paragraph
+        sx={{ mb: 4, maxWidth: 900 }}
+      >
+        This privacy page explains how Conversify handles text submitted for
+        humanizing, AI detection, plagiarism checking, scoring, and content
+        improvement features.
+      </Typography>
+
+      <Grid container spacing={3}>
+        {privacyItems.map((item) => (
+          <Grid item xs={12} md={6} key={item.title}>
+            <MotionCard
+              variant="outlined"
+              sx={{
+                height: "100%",
+                borderRadius: 2,
+                borderColor: "divider",
+              }}
+              whileHover={{
+                y: -4,
+                borderColor: theme.palette.primary.main,
+                boxShadow: "0px 8px 24px rgba(14, 59, 57, 0.14)",
+              }}
+            >
+              <CardContent sx={{ p: { xs: 2, md: 3 } }}>
+                <Typography
+                  variant={isMobile ? "subtitle1" : "h6"}
+                  fontWeight="bold"
+                  gutterBottom
+                >
+                  {item.title}
+                </Typography>
+
+                <Typography
+                  variant={isMobile ? "body2" : "body1"}
+                  color="text.secondary"
+                >
+                  {item.desc}
+                </Typography>
+              </CardContent>
+            </MotionCard>
+          </Grid>
+        ))}
+      </Grid>
+
+      <Box
+        sx={{
+          mt: 4,
+          p: { xs: 2, md: 3 },
+          borderRadius: 2,
+          bgcolor: "rgba(14, 59, 57, 0.08)",
+          border: "1px solid rgba(14, 59, 57, 0.18)",
+        }}
+      >
+        <Typography variant="h6" fontWeight="bold" gutterBottom>
+          Contact for Privacy Requests
+        </Typography>
+
+        <Typography variant="body2" color="text.secondary">
+          For privacy questions, data deletion requests, or Conversify support,
+          contact us at{" "}
+          <Box component="span" sx={{ color: "primary.main", fontWeight: 700 }}>
+            zenmerakihelp@gmail.com
+          </Box>
+          .
+        </Typography>
+      </Box>
+    </Box>
+  );
+}
+
 function CallToActionSection({ isMobile, theme }) {
   return (
     <Box
@@ -661,6 +780,7 @@ function ConversifyContent() {
     { key: SECTION_KEYS.HOW_IT_WORKS, label: "How It Works" },
     { key: SECTION_KEYS.PRICING, label: "Pricing" },
     { key: SECTION_KEYS.FAQ, label: "FAQ" },
+    { key: SECTION_KEYS.PRIVACY, label: " Privacy Policy" },
   ];
 
   const handleHover = (id, isHovering) => {
@@ -703,6 +823,10 @@ function ConversifyContent() {
         );
       case SECTION_KEYS.FAQ:
         return <FAQSection isMobile={isMobile} theme={appTheme} />;
+
+      case SECTION_KEYS.PRIVACY:
+        return <PrivacySection isMobile={isMobile} theme={appTheme} />;
+
       default:
         return (
           <HeroSection

@@ -61,6 +61,7 @@ const SECTION_KEYS = {
   HOW_IT_WORKS: "how-it-works",
   PRICING: "pricing",
   FAQ: "faq",
+  PRIVACY: "privacy",
 };
 
 const featureContent = {
@@ -559,6 +560,121 @@ function FAQSection({ isMobile, theme }) {
   );
 }
 
+function PrivacySection({ isMobile, theme }) {
+  const privacyItems = [
+    {
+      title: "Learning Data You Provide",
+      desc:
+        "EduTech may process course details, study materials, notes, assignments, learning preferences, schedules, and other educational content you add or connect to the app.",
+    },
+    {
+      title: "AI Study Assistance",
+      desc:
+        "When you use AI-powered study tools, EduTech may analyze your learning content to provide explanations, feedback, summaries, study suggestions, and personalized learning support.",
+    },
+    {
+      title: "Personalized Learning",
+      desc:
+        "EduTech may use your progress, preferences, course activity, and learning history to suggest lessons, reminders, revision plans, and study recommendations.",
+    },
+    {
+      title: "Progress Tracking and Reminders",
+      desc:
+        "EduTech may process schedules, task status, progress records, reminders, and activity data to help learners and educators manage learning workflows.",
+    },
+    {
+      title: "Data Use and Security",
+      desc:
+        "Educational data is used only to provide app features, improve learning support, troubleshoot issues, and maintain reliability. Users should avoid uploading highly sensitive personal information. We use reasonable safeguards to protect learning data and related results.",
+    },
+  ];
+
+  return (
+    <Box sx={{ py: { xs: 2, md: 4 } }}>
+      <Typography
+        variant={isMobile ? "h5" : "h4"}
+        component="h2"
+        fontWeight="bold"
+        gutterBottom
+        sx={{ mb: 2 }}
+      >
+         Privacy Policy
+      </Typography>
+
+      <Typography
+        variant={isMobile ? "body2" : "body1"}
+        color="text.secondary"
+        paragraph
+        sx={{ mb: 4, maxWidth: 900 }}
+      >
+        This privacy page explains how EduTech handles learning data, connected
+        education platforms, AI study assistance, personalized lessons,
+        reminders, and progress tracking features.
+      </Typography>
+
+      <Grid container spacing={3}>
+        {privacyItems.map((item) => (
+          <Grid item xs={12} md={6} key={item.title}>
+            <MotionCard
+              variant="outlined"
+              sx={{
+                height: "100%",
+                borderRadius: 2,
+                borderColor: "divider",
+              }}
+              whileHover={{
+                y: -4,
+                borderColor: theme.palette.primary.main,
+                boxShadow: "0px 8px 24px rgba(14, 59, 57, 0.14)",
+              }}
+            >
+              <CardContent sx={{ p: { xs: 2, md: 3 } }}>
+                <Typography
+                  variant={isMobile ? "subtitle1" : "h6"}
+                  fontWeight="bold"
+                  gutterBottom
+                >
+                  {item.title}
+                </Typography>
+
+                <Typography
+                  variant={isMobile ? "body2" : "body1"}
+                  color="text.secondary"
+                >
+                  {item.desc}
+                </Typography>
+              </CardContent>
+            </MotionCard>
+          </Grid>
+        ))}
+      </Grid>
+
+      <Box
+        sx={{
+          mt: 4,
+          p: { xs: 2, md: 3 },
+          borderRadius: 2,
+          bgcolor: "rgba(14, 59, 57, 0.08)",
+          border: "1px solid rgba(14, 59, 57, 0.18)",
+        }}
+      >
+        <Typography variant="h6" fontWeight="bold" gutterBottom>
+          Contact for Privacy Requests
+        </Typography>
+
+        <Typography variant="body2" color="text.secondary">
+          For privacy questions, data deletion requests, or EduTech support,
+          contact us at{" "}
+          <Box component="span" sx={{ color: "primary.main", fontWeight: 700 }}>
+            zenmerakihelp@gmail.com
+          </Box>
+          .
+        </Typography>
+      </Box>
+    </Box>
+  );
+}
+
 function CallToActionSection({ isMobile, theme }) {
   return (
     <Box
@@ -651,18 +767,19 @@ function EduTechContent() {
     { key: SECTION_KEYS.HOW_IT_WORKS, label: "How It Works" },
     { key: SECTION_KEYS.PRICING, label: "Pricing" },
     { key: SECTION_KEYS.FAQ, label: "FAQ" },
+    { key: SECTION_KEYS.PRIVACY, label: " Privacy Policy" },
   ];
 
-const handleHover = (id, isHovering) => {
-  setHoverStates((prev) => ({
-    ...prev,
-    [id]: isHovering,
-  }));
-};
+  const handleHover = (id, isHovering) => {
+    setHoverStates((prev) => ({
+      ...prev,
+      [id]: isHovering,
+    }));
+  };
 
-const handleSectionChange = (sectionKey) => {
-  navigate(`/edutech-app/${sectionKey}`);
-};
+  const handleSectionChange = (sectionKey) => {
+    navigate(`/edutech-app/${sectionKey}`);
+  };
   const renderActiveSection = () => {
     switch (activePage) {
       case SECTION_KEYS.HERO:
@@ -690,6 +807,11 @@ const handleSectionChange = (sectionKey) => {
         );
       case SECTION_KEYS.FAQ:
         return <FAQSection isMobile={isMobile} theme={appTheme} />;
+
+      case SECTION_KEYS.PRIVACY:
+        return <PrivacySection isMobile={isMobile} theme={appTheme} />;
+
+
       default:
         return (
           <HeroSection
@@ -787,7 +909,7 @@ const handleSectionChange = (sectionKey) => {
                       <MotionButton
                         key={item.key}
                         color="inherit"
-                       onClick={() => handleSectionChange(item.key)}
+                        onClick={() => handleSectionChange(item.key)}
                         variant="text"
                         sx={{
                           mx: 0.5,

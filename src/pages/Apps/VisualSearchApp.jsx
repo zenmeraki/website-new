@@ -50,6 +50,7 @@ const SECTION_KEYS = {
   FEATURES: "features",
   HOW_IT_WORKS: "how-it-works",
   FAQ: "faq",
+  PRIVACY: "privacy",
 };
 
 const featureContent = {
@@ -412,6 +413,121 @@ function FAQSection({ isMobile, theme }) {
   );
 }
 
+function PrivacySection({ isMobile, theme }) {
+  const privacyItems = [
+    {
+      title: "Images You Upload",
+      desc:
+        "Visual Search may process images uploaded or captured by customers to identify visual features such as color, pattern, shape, texture, and product style.",
+    },
+    {
+      title: "Visual Product Matching",
+      desc:
+        "Uploaded images are analyzed to find visually similar products from the connected Shopify store or marketplace catalog. Results are based on image similarity and product data.",
+    },
+    {
+      title: "Shopify Product Catalog Data",
+      desc:
+        "Visual Search may access product information required for matching, such as product titles, images, descriptions, collections, tags, vendors, and product URLs.",
+    },
+    {
+      title: "Search Results and Analytics",
+      desc:
+        "The app may process search activity, matched products, clicks, and basic usage data to improve product discovery, search quality, troubleshooting, and app reliability.",
+    },
+    {
+      title: "Data Use and Security",
+      desc:
+        "Uploaded images and product data are used only to provide visual search, product matching, analytics, support, and reliability features. We use reasonable safeguards to protect uploaded images, search data, and store information.",
+    },
+  ];
+
+  return (
+    <Box sx={{ py: { xs: 2, md: 4 } }}>
+      <Typography
+        variant={isMobile ? "h5" : "h4"}
+        component="h2"
+        fontWeight="bold"
+        gutterBottom
+        sx={{ mb: 2 }}
+      >
+        Privacy Policy
+      </Typography>
+
+      <Typography
+        variant={isMobile ? "body2" : "body1"}
+        color="text.secondary"
+        paragraph
+        sx={{ mb: 4, maxWidth: 900 }}
+      >
+        This privacy page explains how Visual Search handles uploaded images,
+        Shopify product catalog data, AI-powered image analysis, product
+        matching, and search activity.
+      </Typography>
+
+      <Grid container spacing={3}>
+        {privacyItems.map((item) => (
+          <Grid item xs={12} md={6} key={item.title}>
+            <MotionPaper
+              variant="outlined"
+              sx={{
+                height: "100%",
+                p: { xs: 2, md: 3 },
+                borderRadius: 2,
+                border: "1px solid",
+                borderColor: "divider",
+              }}
+              whileHover={{
+                y: -4,
+                borderColor: theme.palette.primary.main,
+                boxShadow: "0px 8px 24px rgba(14, 59, 57, 0.14)",
+              }}
+            >
+              <Typography
+                variant={isMobile ? "subtitle1" : "h6"}
+                fontWeight="bold"
+                gutterBottom
+              >
+                {item.title}
+              </Typography>
+
+              <Typography
+                variant={isMobile ? "body2" : "body1"}
+                color="text.secondary"
+              >
+                {item.desc}
+              </Typography>
+            </MotionPaper>
+          </Grid>
+        ))}
+      </Grid>
+
+      <Box
+        sx={{
+          mt: 4,
+          p: { xs: 2, md: 3 },
+          borderRadius: 2,
+          bgcolor: "rgba(14, 59, 57, 0.08)",
+          border: "1px solid rgba(14, 59, 57, 0.18)",
+        }}
+      >
+        <Typography variant="h6" fontWeight="bold" gutterBottom>
+          Contact for Privacy Requests
+        </Typography>
+
+        <Typography variant="body2" color="text.secondary">
+          For privacy questions, image data requests, product search data
+          requests, or Visual Search support, contact us at{" "}
+          <Box component="span" sx={{ color: "primary.main", fontWeight: 700 }}>
+            zenmerakihelp@gmail.com
+          </Box>
+          .
+        </Typography>
+      </Box>
+    </Box>
+  );
+}
+
 function CallToActionSection({ isMobile, theme }) {
   return (
     <Box
@@ -521,7 +637,9 @@ function VisualSearchContent() {
     { key: SECTION_KEYS.FEATURES, label: "Features" },
     { key: SECTION_KEYS.HOW_IT_WORKS, label: "How It Works" },
     { key: SECTION_KEYS.FAQ, label: "FAQ" },
+    { key: SECTION_KEYS.PRIVACY, label: "Privacy Policy" },
   ];
+
   const handleSectionChange = (sectionKey) => {
     navigate(`/visual-search-app/${sectionKey}`);
   };
@@ -535,6 +653,8 @@ function VisualSearchContent() {
         return <HowItWorksSection isMobile={isMobile} theme={appTheme} />;
       case SECTION_KEYS.FAQ:
         return <FAQSection isMobile={isMobile} theme={appTheme} />;
+      case SECTION_KEYS.PRIVACY:
+        return <PrivacySection isMobile={isMobile} theme={appTheme} />;
       default:
         return <HeroSection isMobile={isMobile} />;
     }

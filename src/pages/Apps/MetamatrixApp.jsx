@@ -58,6 +58,7 @@ const SECTION_KEYS = {
   HOW_IT_WORKS: "how-it-works",
   PRICING: "pricing",
   FAQ: "faq",
+  PRIVACY: "privacy",
 };
 
 const featureContent = {
@@ -586,6 +587,120 @@ function FAQSection({ isMobile, theme }) {
   );
 }
 
+//privacy
+function PrivacySection({ isMobile, theme }) {
+  const privacyItems = [
+    {
+      title: "Store Data Access",
+      desc: "MetaMatrix accesses only the Shopify store data required to provide bulk editing features, such as products, variants, collections, inventory, and related product fields.",
+    },
+    {
+      title: "No Customer Payment Data",
+      desc: "MetaMatrix does not collect, store, or process customer payment details, credit card information, or sensitive checkout data.",
+    },
+    {
+      title: "Purpose of Data Usage",
+      desc: "Store data is used only to help merchants view, edit, schedule, and manage product catalog updates inside the app.",
+    },
+    {
+      title: "Data Security",
+      desc: "We apply reasonable technical and organizational measures to protect merchant data from unauthorized access, misuse, alteration, or disclosure.",
+    },
+    {
+      title: "Data Retention",
+      desc: "We retain only the data required to provide app functionality, maintain edit history, support troubleshooting, and comply with operational requirements.",
+    },
+    {
+      title: "App Uninstall",
+      desc: "When the app is uninstalled, access to the Shopify store is revoked. Stored operational data may be deleted or retained only as required for compliance, audit, or support purposes.",
+    },
+  ];
+
+  return (
+    <Box sx={{ py: { xs: 2, md: 4 } }}>
+      <Typography
+        variant={isMobile ? "h5" : "h4"}
+        component="h2"
+        fontWeight="bold"
+        gutterBottom
+        sx={{ mb: 2 }}
+      >
+        Privacy Policy
+      </Typography>
+
+      <Typography
+        variant={isMobile ? "body2" : "body1"}
+        color="text.secondary"
+        paragraph
+        sx={{ mb: 4, maxWidth: 900 }}
+      >
+        This privacy page explains how MetaMatrix handles Shopify store data
+        when merchants install and use the app.
+      </Typography>
+
+      <Grid container spacing={3}>
+        {privacyItems.map((item) => (
+          <Grid item xs={12} md={6} key={item.title}>
+            <MotionCard
+              variant="outlined"
+              sx={{
+                height: "100%",
+                borderRadius: 2,
+                borderColor: "divider",
+              }}
+              whileHover={{
+                y: -4,
+                borderColor: theme.palette.primary.main,
+                boxShadow: "0px 8px 24px rgba(14, 59, 57, 0.14)",
+              }}
+            >
+              <CardContent sx={{ p: { xs: 2, md: 3 } }}>
+                <Typography
+                  variant={isMobile ? "subtitle1" : "h6"}
+                  fontWeight="bold"
+                  gutterBottom
+                >
+                  {item.title}
+                </Typography>
+
+                <Typography
+                  variant={isMobile ? "body2" : "body1"}
+                  color="text.secondary"
+                >
+                  {item.desc}
+                </Typography>
+              </CardContent>
+            </MotionCard>
+          </Grid>
+        ))}
+      </Grid>
+
+      <Box
+        sx={{
+          mt: 4,
+          p: { xs: 2, md: 3 },
+          borderRadius: 2,
+          bgcolor: "rgba(14, 59, 57, 0.08)",
+          border: "1px solid rgba(14, 59, 57, 0.18)",
+        }}
+      >
+        <Typography variant="h6" fontWeight="bold" gutterBottom>
+          Contact for Privacy Requests
+        </Typography>
+
+        <Typography variant="body2" color="text.secondary">
+          For privacy-related questions, data deletion requests, or app support,
+          contact us at{" "}
+          <Box component="span" sx={{ color: "primary.main", fontWeight: 700 }}>
+            zenmerakihelp@gmail.com
+          </Box>
+          .
+        </Typography>
+      </Box>
+    </Box>
+  );
+}
+
 function CallToActionSection({ isMobile, theme }) {
   return (
     <Box
@@ -688,6 +803,7 @@ const MetaMatrixApp = () => {
     { key: SECTION_KEYS.HOW_IT_WORKS, label: "How It Works", type: "tab" },
     { key: SECTION_KEYS.PRICING, label: "Pricing", type: "tab" },
     { key: SECTION_KEYS.FAQ, label: "FAQ", type: "tab" },
+    { key: SECTION_KEYS.PRIVACY, label: " Privacy Policy", type: "tab" },
     {
       key: "documentation",
       label: "Documentation",
@@ -732,6 +848,9 @@ const MetaMatrixApp = () => {
 
       case SECTION_KEYS.FAQ:
         return <FAQSection isMobile={isMobile} theme={appTheme} />;
+
+      case SECTION_KEYS.PRIVACY:
+        return <PrivacySection isMobile={isMobile} theme={appTheme} />;
 
       default:
         return (

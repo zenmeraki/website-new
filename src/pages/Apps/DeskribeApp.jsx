@@ -59,6 +59,7 @@ const SECTION_KEYS = {
   HOW_IT_WORKS: "how-it-works",
   PRICING: "pricing",
   FAQ: "faq",
+  PRIVACY: "privacy",
 };
 
 const featureContent = {
@@ -504,6 +505,7 @@ function PricingSection({ isMobile, theme, onOpenInstall }) {
   );
 }
 
+
 function FAQSection({ isMobile, theme }) {
   return (
     <Box sx={{ py: { xs: 2, md: 4 } }}>
@@ -548,6 +550,121 @@ function FAQSection({ isMobile, theme }) {
             {index < faqs.length - 1 && <Divider sx={{ mt: 3 }} />}
           </MotionBox>
         ))}
+      </Box>
+    </Box>
+  );
+}
+
+function PrivacySection({ isMobile, theme }) {
+  const privacyItems = [
+    {
+      title: "Shopify Product Data",
+      desc:
+        "Deskribe AI accesses the Shopify product data required to generate useful descriptions, such as product title, existing description, product type, tags, vendor, variants, and related product details.",
+    },
+    {
+      title: "AI Description Generation",
+      desc:
+        "When you generate content, Deskribe AI uses selected product information to create product descriptions, improve readability, adjust tone, and produce content that matches your store’s product details.",
+    },
+    {
+      title: "SEO Suggestions",
+      desc:
+        "Deskribe AI may analyze product information to suggest SEO-friendly keywords, product copy, meta-style content, and related wording intended to improve product visibility and search performance.",
+    },
+    {
+      title: "Saving Content to Shopify",
+      desc:
+        "Generated descriptions or SEO content are saved to your Shopify store only when you choose to publish or save them. Deskribe AI uses Shopify permissions to update the selected product fields.",
+    },
+    {
+      title: "Data Use and Security",
+      desc:
+        "Product data is used only to provide app features, generate requested content, support troubleshooting, improve reliability, and prevent misuse. We use reasonable safeguards to protect store data and generated content.",
+    },
+  ];
+
+  return (
+    <Box sx={{ py: { xs: 2, md: 4 } }}>
+      <Typography
+        variant={isMobile ? "h5" : "h4"}
+        component="h2"
+        fontWeight="bold"
+        gutterBottom
+        sx={{ mb: 2 }}
+      >
+       Privacy Policy
+      </Typography>
+
+      <Typography
+        variant={isMobile ? "body2" : "body1"}
+        color="text.secondary"
+        paragraph
+        sx={{ mb: 4, maxWidth: 900 }}
+      >
+        This privacy page explains how Deskribe AI handles Shopify product data,
+        AI-generated descriptions, SEO suggestions, and content saved back to
+        your store.
+      </Typography>
+
+      <Grid container spacing={3}>
+        {privacyItems.map((item) => (
+          <Grid item xs={12} md={6} key={item.title}>
+            <MotionCard
+              variant="outlined"
+              sx={{
+                height: "100%",
+                borderRadius: 2,
+                borderColor: "divider",
+              }}
+              whileHover={{
+                y: -4,
+                borderColor: theme.palette.primary.main,
+                boxShadow: "0px 8px 24px rgba(14, 59, 57, 0.14)",
+              }}
+            >
+              <CardContent sx={{ p: { xs: 2, md: 3 } }}>
+                <Typography
+                  variant={isMobile ? "subtitle1" : "h6"}
+                  fontWeight="bold"
+                  gutterBottom
+                >
+                  {item.title}
+                </Typography>
+
+                <Typography
+                  variant={isMobile ? "body2" : "body1"}
+                  color="text.secondary"
+                >
+                  {item.desc}
+                </Typography>
+              </CardContent>
+            </MotionCard>
+          </Grid>
+        ))}
+      </Grid>
+
+      <Box
+        sx={{
+          mt: 4,
+          p: { xs: 2, md: 3 },
+          borderRadius: 2,
+          bgcolor: "rgba(14, 59, 57, 0.08)",
+          border: "1px solid rgba(14, 59, 57, 0.18)",
+        }}
+      >
+        <Typography variant="h6" fontWeight="bold" gutterBottom>
+          Contact for Privacy Requests
+        </Typography>
+
+        <Typography variant="body2" color="text.secondary">
+          For privacy questions, data deletion requests, or Deskribe AI support,
+          contact us at{" "}
+          <Box component="span" sx={{ color: "primary.main", fontWeight: 700 }}>
+            zenmerakihelp@gmail.com
+          </Box>
+          .
+        </Typography>
       </Box>
     </Box>
   );
@@ -649,6 +766,7 @@ function DeskribeAppContent() {
     { key: SECTION_KEYS.HOW_IT_WORKS, label: "How It Works", type: "tab" },
     { key: SECTION_KEYS.PRICING, label: "Pricing", type: "tab" },
     { key: SECTION_KEYS.FAQ, label: "FAQ", type: "tab" },
+    { key: SECTION_KEYS.PRIVACY, label: "Privacy Policy", type: "tab" },
     {
       key: "documentation",
       label: "Documentation",
@@ -697,6 +815,10 @@ function DeskribeAppContent() {
         );
       case SECTION_KEYS.FAQ:
         return <FAQSection isMobile={isMobile} theme={appTheme} />;
+
+      case SECTION_KEYS.PRIVACY:
+        return <PrivacySection isMobile={isMobile} theme={appTheme} />;
+
       default:
         return (
           <HeroSection
